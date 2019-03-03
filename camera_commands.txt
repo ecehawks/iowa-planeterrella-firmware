@@ -1,0 +1,11 @@
+start:
+
+	sudo service motion start
+
+stop:
+
+	sudo service motion stop
+
+to edit config file:
+
+	sudo nano /etc/motion/motion.conf
