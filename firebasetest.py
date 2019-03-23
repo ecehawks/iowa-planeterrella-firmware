@@ -1,24 +1,42 @@
 import RPi.GPIO as GPIO
 from time import sleep
-from firebase import firebase
+import pyrebase
+
+
 
 GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(40, GPIO.OUT, initial=GPIO.LOW)
-firebase = firebase.FirebaseApplication('https://ui-planeterrella.firebaseio.com/', None)
+GPIO.setmode(GPIO.BCM)
+
+config = {
+  "apiKey": "AIzaSyAkHCx7BgKyYlZgToo2hZgM2g61RrKZYcU",
+  "authDomain": "ui-planeterrella.firebaseapp.com",
+  "databaseURL": "https://ui-planeterrella.firebaseio.com/",
+  "storageBucket": "ui-planeterrella.appspot.com"
+}
+
+firebase = pyrebase.initialize_app(config)
+db = firebase.database()
+
+knobposition = 0;
+IPRGM_Pos = 0;
+EPRGM_Pos = 0;
+PRGM = True;
+PRGM_Pin = 5;
+EMONTR_new = 0;
+IMONTR_new = 0;
+EMONTR = 0;
+IMONTR = 0;
 
 
 i=0
-while (i < 50):
-	result = firebase.get('/led_On', None)
-	print (result)
-
-	if result:
-	    GPIO.output(40, GPIO.HIGH)
+while (1):
+	db.update({"voltage": testingpos})
+	if PRGM:
+		print ("IRPGM_pos = ", IPRGM_Pos)
 	else:
-	    GPIO.output(40, GPIO.LOW)
-	i += 1
-	sleep(1)
+		print ("ERPGM_pos = ", EPRGM_Pos)
 
-GPIO.output(40, GPIO.LOW)
+	sleep(1)
+	i +=1
+
 
