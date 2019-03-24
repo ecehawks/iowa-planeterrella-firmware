@@ -5,7 +5,11 @@ import pyrebase
 
 
 GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(20, GPIO.OUt, initial=GPIO.LOW)
+GPIO.setup(20, GPIO.OUt, initial=GPIO.LOW)
+GPIO.setup(20, GPIO.OUt, initial=GPIO.LOW)
+
 
 config = {
   "apiKey": "AIzaSyAkHCx7BgKyYlZgToo2hZgM2g61RrKZYcU",
@@ -16,16 +20,6 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
-
-knobposition = 0;
-IPRGM_Pos = 0;
-EPRGM_Pos = 0;
-PRGM = True;
-PRGM_Pin = 5;
-EMONTR_new = 0;
-IMONTR_new = 0;
-EMONTR = 0;
-IMONTR = 0;
 
 
 i=0
@@ -38,5 +32,6 @@ while (1):
 
 	sleep(1)
 	i +=1
+
 
 
