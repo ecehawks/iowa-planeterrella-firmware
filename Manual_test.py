@@ -10,6 +10,14 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 import pyrebase
 from time import sleep
+import RPi.GPIO as GPIO 
+
+GPIO.setwarnings(False)    # Ignore warning for now
+GPIO.setmode(GPIO.BCM)   # Use physical pin numbering
+GPIO.setup(16, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW)
+
 
 # Set up and configure Firebase Connection
 config = {
@@ -134,15 +142,26 @@ class Ui_MainWindow(object):
         if b.text() == "Low":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
-                db.update({"air_pressure": "Low"})      
+                db.update({"air_pressure": "Low"})
+                GPIO.output (21, GPIO.HIGH)
+                GPIO.output (20, GPIO.LOW)
+                GPIO.output (16, GPIO.LOW) 
         if b.text() == "Medium":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
                 db.update({"air_pressure": "Medium"})
+                GPIO.output (21, GPIO.LOW)
+                GPIO.output (20, GPIO.HIGH)
+                GPIO.output (16, GPIO.LOW)
+
         if b.text() == "High":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
                 db.update({"air_pressure": "High"})
+                GPIO.output (21, GPIO.LOW)
+                GPIO.output (20, GPIO.LOW)
+                GPIO.output (16, GPIO.HIGH)
+
         if b.text() == "Aurora":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
