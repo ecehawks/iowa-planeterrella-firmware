@@ -17,7 +17,9 @@ GPIO.setmode(GPIO.BCM)   # Use physical pin numbering
 GPIO.setup(16, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW)
-
+GPIO.setup(26, GPIO.OUT) #PWM PIN
+p = GPIO.PWM(26,100)
+p.start(0)
 
 # Set up and configure Firebase Connection
 config = {
@@ -105,6 +107,7 @@ class Ui_MainWindow(object):
         self.splitter.setObjectName("splitter")
         self.spinBox = QtWidgets.QSpinBox(self.splitter)
         self.spinBox.setObjectName("spinBox")
+        self.spinBox.valueChanged.connect(self.valuechange)
         self.voltageLabel = QtWidgets.QLabel(self.splitter)
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -174,7 +177,12 @@ class Ui_MainWindow(object):
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
                 db.update({"mode": "Ring Current"})
-
+    
+    def valuechange(self):
+        p.ChangeDutyCycle(self.spinBox.value())
+        #self.voltageLabel.setText (str(self.spinBox.value()))
+    
+    
 def main():
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
