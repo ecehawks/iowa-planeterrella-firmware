@@ -38,7 +38,7 @@ while (i != 10):
 		print (mode)
 
 	else:
-		print ("\nInvalid mode type passed\n") 
+		print ("Invalid mode type passed: %s " %(mode)) 
 
 	#################################
 	# Work done based on air_pressure
@@ -53,7 +53,7 @@ while (i != 10):
 		print (air_pressure)
 
 	else:
-		print ("\nInvalid air_pressure type passed\n") 
+		print ("Invalid air_pressure type passed: %s" %(air_pressure)) 
 
 	
 	################
