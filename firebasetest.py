@@ -1,11 +1,12 @@
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 from time import sleep
 import pyrebase
+#GPIO.setwarnings(False)
+#GPIO.setmode(GPIO.BCM)
 
-
-
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
+#GPIO.setup(26, GPIO.OUT) #pwm pin 37 on pi
+#p = GPIO.PWM(26, 100)
+#p.start(0)
 
 config = {
   "apiKey": "AIzaSyAkHCx7BgKyYlZgToo2hZgM2g61RrKZYcU",
@@ -17,26 +18,53 @@ config = {
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
-knobposition = 0;
-IPRGM_Pos = 0;
-EPRGM_Pos = 0;
-PRGM = True;
-PRGM_Pin = 5;
-EMONTR_new = 0;
-IMONTR_new = 0;
-EMONTR = 0;
-IMONTR = 0;
-
-
 i=0
-while (1):
-	db.update({"voltage": testingpos})
-	if PRGM:
-		print ("IRPGM_pos = ", IPRGM_Pos)
+while (i != 10):
+	air_pressure = 	db.child("air_pressure").get().val()
+	mode = db.child("mode").get().val()
+	voltage = db.child("voltage").get().val()
+
+	#########################
+	# work done based on mode
+	#########################
+	if (mode == "Aurora"):
+		#gpio stuff
+		print (mode)
+
+	elif (mode == "Ring"):
+		print (mode)
+
+	elif (mode == "Belt"):
+		print (mode)
+
 	else:
-		print ("ERPGM_pos = ", EPRGM_Pos)
+		print ("\nInvalid mode type passed\n") 
 
-	sleep(1)
-	i +=1
+	#################################
+	# Work done based on air_pressure
+	#################################
+	if (air_pressure == "Low"):
+		print (air_pressure)
+
+	elif (air_pressure == "Medium"):
+		print (air_pressure)
+
+	elif (air_pressure == "High"):
+		print (air_pressure)
+
+	else:
+		print ("\nInvalid air_pressure type passed\n") 
+
+	
+	################
+	#voltage control
+	#
+	#will have to do some math to figure out relation between changing pwm frequenzy and voltage increment
+	################
+
+	#p.ChangeDutyCycle(voltage)
 
 
+
+	sleep(0.5)
+	i += 1
