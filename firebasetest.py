@@ -4,8 +4,16 @@ import pyrebase
 #GPIO.setwarnings(False)
 #GPIO.setmode(GPIO.BCM)
 
-#GPIO.setup(26, GPIO.OUT) #pwm pin 37 on pi
-#p = GPIO.PWM(26, 100)
+####### Setup gpio pins for mode configuration #########
+# GPIO.setup(5, GPIO.OUT, initial=GPIO.LOW)  # Second Needle
+# GPIO.setup(6, GPIO.OUT, initial=GPIO.LOW)  # Top Needle
+# GPIO.setup(13, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Pos)
+# GPIO.setup(19, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Neg)
+# GPIO.setup(26, GPIO.OUT, initial=GPIO.LOW) # Big Sphere
+
+##### PWM Setup #############
+#GPIO.setup(21, GPIO.OUT) #pwm pin 40 on pi
+#p = GPIO.PWM(21, 100)
 #p.start(0)
 
 config = {
@@ -25,16 +33,37 @@ while (i != 10):
 	voltage = db.child("voltage").get().val()
 
 	#########################
-	# work done based on mode
+	# work done based on mode (5 GPIO)
+	#
+	# Current setup Little sphere is connected positive and negative
+	# 1 & 7, 12 & 5, 11 & 6 are dead (off) postion
+	# 2 & 8  = Top Needle, Big Sphere   		Aurora
+	# 3 & 9  = Second Needle, Little sphere- 	Belts (auroral lobe)
+	# 4 & 10 = Little sphere+, Big Sphere 		Ring Current
 	#########################
 	if (mode == "Aurora"):
 		#gpio stuff
-		print (mode)
-
-	elif (mode == "Ring"):
+		# GPIO.output(5, GPIO.LOW)
+		# GPIO.output(6, GPIO.HIGH)
+		# GPIO.output(13, GPIO.LOW)
+		# GPIO.output(19, GPIO.LOW)
+		# GPIO.output(26, GPIO.HIGH)
 		print (mode)
 
 	elif (mode == "Belt"):
+		# GPIO.output(5, GPIO.LOW)
+		# GPIO.output(6, GPIO.HIGH)
+		# GPIO.output(13, GPIO.LOW)
+		# GPIO.output(19, GPIO.HIGH)
+		# GPIO.output(26, GPIO.LOW)
+		print (mode)
+
+	elif (mode == "Ring"):
+		# GPIO.output(5, GPIO.LOW)
+		# GPIO.output(6, GPIO.LOW)
+		# GPIO.output(13, GPIO.HIGH)
+		# GPIO.output(19, GPIO.LOW)
+		# GPIO.output(26, GPIO.HIGH)
 		print (mode)
 
 	else:
