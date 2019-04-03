@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="Power">
+    <file>Power.png</file>
+    <file>PowerPressed.png</file>
+  </qresource>
+</RCC>
