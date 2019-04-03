@@ -1,20 +1,20 @@
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 from time import sleep
 import pyrebase
-#GPIO.setwarnings(False)
-#GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
 
 ####### Setup gpio pins for mode configuration #########
-# GPIO.setup(5, GPIO.OUT, initial=GPIO.LOW)  # Second Needle
-# GPIO.setup(6, GPIO.OUT, initial=GPIO.LOW)  # Top Needle
-# GPIO.setup(13, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Pos)
-# GPIO.setup(19, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Neg)
-# GPIO.setup(26, GPIO.OUT, initial=GPIO.LOW) # Big Sphere
+GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW)  # Second Needle
+GPIO.setup(22, GPIO.OUT, initial=GPIO.LOW)  # Top Needle
+GPIO.setup(23, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Pos)
+GPIO.setup(24, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Neg)
+GPIO.setup(25, GPIO.OUT, initial=GPIO.LOW) # Big Sphere
 
 ##### PWM Setup #############
-#GPIO.setup(21, GPIO.OUT) #pwm pin 40 on pi
-#p = GPIO.PWM(21, 100)
-#p.start(0)
+GPIO.setup(21, GPIO.OUT) #pwm pin 40 on pi
+p = GPIO.PWM(21, 100)
+p.start(0)
 
 config = {
   "apiKey": "AIzaSyAkHCx7BgKyYlZgToo2hZgM2g61RrKZYcU",
@@ -27,7 +27,7 @@ firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
 i=0
-while (i != 10):
+while (i != 30):
 	air_pressure = 	db.child("air_pressure").get().val()
 	mode = db.child("mode").get().val()
 	voltage = db.child("voltage").get().val()
@@ -43,27 +43,27 @@ while (i != 10):
 	#########################
 	if (mode == "Aurora"):
 		#gpio stuff
-		# GPIO.output(5, GPIO.LOW)
-		# GPIO.output(6, GPIO.HIGH)
-		# GPIO.output(13, GPIO.LOW)
-		# GPIO.output(19, GPIO.LOW)
-		# GPIO.output(26, GPIO.HIGH)
+		GPIO.output(21, GPIO.LOW)
+		GPIO.output(22, GPIO.HIGH)
+		GPIO.output(23, GPIO.LOW)
+		GPIO.output(24, GPIO.LOW)
+		GPIO.output(25, GPIO.HIGH)
 		print (mode)
 
 	elif (mode == "Belt"):
-		# GPIO.output(5, GPIO.LOW)
-		# GPIO.output(6, GPIO.HIGH)
-		# GPIO.output(13, GPIO.LOW)
-		# GPIO.output(19, GPIO.HIGH)
-		# GPIO.output(26, GPIO.LOW)
+		GPIO.output(21, GPIO.LOW)
+		GPIO.output(22, GPIO.HIGH)
+		GPIO.output(23, GPIO.LOW)
+		GPIO.output(24, GPIO.HIGH)
+		GPIO.output(25, GPIO.LOW)
 		print (mode)
 
 	elif (mode == "Ring"):
-		# GPIO.output(5, GPIO.LOW)
-		# GPIO.output(6, GPIO.LOW)
-		# GPIO.output(13, GPIO.HIGH)
-		# GPIO.output(19, GPIO.LOW)
-		# GPIO.output(26, GPIO.HIGH)
+		GPIO.output(21, GPIO.LOW)
+		GPIO.output(22, GPIO.LOW)
+		GPIO.output(23, GPIO.HIGH)
+		GPIO.output(24, GPIO.LOW)
+		GPIO.output(25, GPIO.HIGH)
 		print (mode)
 
 	else:
@@ -95,5 +95,12 @@ while (i != 10):
 
 
 
-	sleep(0.5)
+	sleep(1)
 	i += 1
+
+
+GPIO.output(5, GPIO.LOW)
+GPIO.output(6, GPIO.LOW)
+GPIO.output(13, GPIO.LOW)
+GPIO.output(19, GPIO.LOW)
+GPIO.output(26, GPIO.LOW)
