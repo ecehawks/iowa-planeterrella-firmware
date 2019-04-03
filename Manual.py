@@ -135,13 +135,13 @@ class Ui_MainWindow(object):
         self.powerButton.setText("")
         self.powerButton.setIconSize(QtCore.QSize(90, 90))
         self.powerButton.setObjectName("powerButton")
-        self.ringButton.toggled.connect(lambda:self.powerDown(self.powerButton))
-        self.voltageLabel_2 = QtWidgets.QLabel(self.centralwidget)
-        self.voltageLabel_2.setGeometry(QtCore.QRect(180, 10, 191, 45))
+        self.powerButton.clicked.connect(self.powerDown)
+        self.voltageLabel = QtWidgets.QLabel(self.centralwidget)
+        self.voltageLabel.setGeometry(QtCore.QRect(180, 10, 191, 45))
         font = QtGui.QFont()
         font.setPointSize(22)
-        self.voltageLabel_2.setFont(font)
-        self.voltageLabel_2.setObjectName("voltageLabel_2")
+        self.voltageLabel.setFont(font)
+        self.voltageLabel.setObjectName("voltageLabel")
         self.spinBox_2 = QtWidgets.QSpinBox(self.centralwidget)
         self.spinBox_2.setGeometry(QtCore.QRect(160, 60, 191, 40))
         font = QtGui.QFont()
@@ -155,7 +155,7 @@ class Ui_MainWindow(object):
 
         #timer
         self.timer = QtCore.QTimer()
-        self.timer.setInterval(10000) #2 second
+        self.timer.setInterval(500) #2 second
         self.timer.timeout.connect(self.voltsTimer)
         self.timer.start()
 			
@@ -174,7 +174,7 @@ class Ui_MainWindow(object):
         self.auroraButton.setText(_translate("MainWindow", "Aurora"))
         self.radiationButton.setText(_translate("MainWindow", "Radiation Belts"))
         self.ringButton.setText(_translate("MainWindow", "Ring Current"))
-        self.voltageLabel_2.setText(_translate("MainWindow", "Voltage"))
+        self.voltageLabel.setText(_translate("MainWindow", "Voltage"))
 
     # Function for handling Pressure selection
     def pressurebtnstate(self, b):
@@ -227,6 +227,7 @@ class Ui_MainWindow(object):
         GPIO.output (16, GPIO.LOW)
         p.ChangeDutyCycle(0)
         print ("Powering Down")
+        sleep(2) #fake news
         sys.exit()
 	
 	

@@ -132,7 +132,7 @@ class Ui_MainWindow(object):
 
         #timer
         self.timer = QtCore.QTimer()
-        self.timer.setInterval(2000) #2 second
+        self.timer.setInterval(500) #2 second
         self.timer.timeout.connect(self.voltsTimer)
         self.timer.start()
 	
