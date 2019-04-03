@@ -6,6 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 import sys
+import icons #images for buttons and stuff
 from PyQt5 import QtCore, QtGui, QtWidgets
 from time import sleep
 import RPi.GPIO as GPIO
@@ -154,7 +155,7 @@ class Ui_MainWindow(object):
 
         #timer
         self.timer = QtCore.QTimer()
-        self.timer.setInterval(2000) #2 second
+        self.timer.setInterval(10000) #2 second
         self.timer.timeout.connect(self.voltsTimer)
         self.timer.start()
 			
@@ -202,13 +203,13 @@ class Ui_MainWindow(object):
     def modebtnstate(self, b):    
         if b.text() == "Aurora":
             if b.isChecked() == True:
-                #print(b.text()+" is selected")
+                print(b.text()+" is selected")
         if b.text() == "Radiation Belts":
             if b.isChecked() == True:
-                #print(b.text()+" is selected")
+                print(b.text()+" is selected")
         if b.text() == "Ring Current":
             if b.isChecked() == True:
-                #print(b.text()+" is selected")
+                print(b.text()+" is selected")
     
     def valuechange(self):
         p.ChangeDutyCycle(self.spinBox.value())
@@ -220,16 +221,16 @@ class Ui_MainWindow(object):
         print (str(volts))
 		
 	
-	def powerDown(self):
-		GPIO.output (21, GPIO.LOW)
+    def powerDown(self):
+        GPIO.output (21, GPIO.LOW)
         GPIO.output (20, GPIO.LOW)
         GPIO.output (16, GPIO.LOW)
-		p.ChangeDutyCycle(0)
-		sys.exit()
+        p.ChangeDutyCycle(0)
+        print ("Powering Down")
+        sys.exit()
 	
 	
 	
-import icons_rc
 
 
 def main():
