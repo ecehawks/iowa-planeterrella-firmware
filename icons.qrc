@@ -3,4 +3,8 @@
     <file>Power.png</file>
     <file>PowerPressed.png</file>
   </qresource>
+  <qresource prefix="HV">
+    <file>HVOFF.png</file>
+    <file>HVON.png</file>
+  </qresource>
 </RCC>

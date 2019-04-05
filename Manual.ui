@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>900</width>
-    <height>350</height>
+    <height>351</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,7 +35,7 @@
    <widget class="Line" name="line">
     <property name="geometry">
      <rect>
-      <x>433</x>
+      <x>430</x>
       <y>0</y>
       <width>20</width>
       <height>581</height>
@@ -186,7 +186,7 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>81</width>
+      <width>101</width>
       <height>91</height>
      </rect>
     </property>
@@ -215,12 +215,12 @@ background-repeat: none;
      </size>
     </property>
    </widget>
-   <widget class="QLabel" name="voltageLabel_2">
+   <widget class="QLabel" name="voltageLabel">
     <property name="geometry">
      <rect>
       <x>180</x>
       <y>10</y>
-      <width>191</width>
+      <width>131</width>
       <height>45</height>
      </rect>
     </property>
@@ -246,6 +246,52 @@ background-repeat: none;
      <font>
       <pointsize>12</pointsize>
      </font>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="hvButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>260</y>
+      <width>91</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#hvButton{
+background-color: transparent;
+border-image: url(:/HV/HVON.png) ;
+background: none;
+broder: none;
+background-repeat: none;
+
+}
+
+#hvButton:pressed
+{
+	border-image: url(:/HV/HVOFF.png);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="hvLabel">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>260</y>
+      <width>301</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>High Voltage ON</string>
     </property>
    </widget>
   </widget>
