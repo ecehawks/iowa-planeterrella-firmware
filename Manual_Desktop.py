@@ -113,12 +113,7 @@ class Ui_MainWindow(object):
         font.setPointSize(22)
         self.voltageLabelName.setFont(font)
         self.voltageLabelName.setObjectName("voltageLabelName")
-        self.voltageSpinbox = QtWidgets.QSpinBox(self.centralwidget)
-        self.voltageSpinbox.setGeometry(QtCore.QRect(160, 60, 191, 40))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.voltageSpinbox.setFont(font)
-        self.voltageSpinbox.setObjectName("voltageSpinbox")
+        
         self.hvButton = QtWidgets.QPushButton(self.centralwidget)
         self.hvButton.setGeometry(QtCore.QRect(20, 260, 91, 41))
         self.hvButton.setText("")
@@ -129,13 +124,14 @@ class Ui_MainWindow(object):
         self.hvButton.clicked.connect(lambda:self.buttonToggle(self.hvButton))
         self.hvButton.setIcon(QtGui.QIcon(":/HV/HVON.png"))
         self.hvButton.setIconSize(QtCore.QSize(290,41)) ##size of buttonToggle
-		########################################################
+        ########################################################
         self.hvLabel = QtWidgets.QLabel(self.centralwidget)
         self.hvLabel.setGeometry(QtCore.QRect(120, 260, 301, 41))
         font = QtGui.QFont()
         font.setPointSize(22)
         self.hvLabel.setFont(font)
         self.hvLabel.setObjectName("hvLabel")
+        
         self.voltageLabel = QtWidgets.QLabel(self.centralwidget)
         self.voltageLabel.setGeometry(QtCore.QRect(300, 10, 131, 51))
         font = QtGui.QFont()
@@ -148,18 +144,23 @@ class Ui_MainWindow(object):
         font.setPointSize(22)
         self.currentLabel.setFont(font)
         self.currentLabel.setObjectName("currentLabel")
-        self.currentSpinbox = QtWidgets.QSpinBox(self.centralwidget)
-        self.currentSpinbox.setGeometry(QtCore.QRect(160, 160, 191, 40))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.currentSpinbox.setFont(font)
-        self.currentSpinbox.setObjectName("currentSpinbox")
+        
         self.currentLabelName = QtWidgets.QLabel(self.centralwidget)
         self.currentLabelName.setGeometry(QtCore.QRect(160, 110, 131, 45))
         font = QtGui.QFont()
         font.setPointSize(22)
         self.currentLabelName.setFont(font)
         self.currentLabelName.setObjectName("currentLabelName")
+        
+        self.voltageSlider = QtWidgets.QSlider(self.centralwidget)
+        self.voltageSlider.setGeometry(QtCore.QRect(140, 60, 211, 41))
+        self.voltageSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.voltageSlider.setObjectName("voltageSlider")
+        self.currentSlider = QtWidgets.QSlider(self.centralwidget)
+        self.currentSlider.setGeometry(QtCore.QRect(140, 161, 211, 41))
+        self.currentSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.currentSlider.setObjectName("currentSlider")
+        
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -190,9 +191,9 @@ class Ui_MainWindow(object):
             self.hvButton.setIcon(QtGui.QIcon(":/HV/HVON.png"))
             self.hvLabel.setText("High Voltage ON")
         else:
-            self.hvButton.setIcon(QtGui.QIcon(":/HV/HVOFF.png"))	
-            self.hvLabel.setText("High Voltage OFF")			
-	
+            self.hvButton.setIcon(QtGui.QIcon(":/HV/HVOFF.png"))    
+            self.hvLabel.setText("High Voltage OFF")            
+    
 def main():
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
@@ -203,5 +204,5 @@ def main():
     sys.exit(app.exec_())
     
 if __name__ == "__main__":
-    main()	
+    main()  
 

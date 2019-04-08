@@ -55,7 +55,7 @@ class Ui_MainWindow(object):
         self.lowButton.setFont(font)
         self.lowButton.setChecked(False)
         self.lowButton.setObjectName("lowButton")
-		#button pressed
+        #button pressed
         self.lowButton.toggled.connect(lambda:self.pressurebtnstate(self.lowButton))
         self.verticalLayout_2.addWidget(self.lowButton)
         self.medButton = QtWidgets.QRadioButton(self.layoutWidget)
@@ -64,7 +64,7 @@ class Ui_MainWindow(object):
         self.medButton.setFont(font)
         self.medButton.setChecked(True)
         self.medButton.setObjectName("medButton")
-		#button pressed
+        #button pressed
         self.medButton.toggled.connect(lambda:self.pressurebtnstate(self.medButton))
         self.verticalLayout_2.addWidget(self.medButton)
         self.highButton = QtWidgets.QRadioButton(self.layoutWidget)
@@ -72,7 +72,7 @@ class Ui_MainWindow(object):
         font.setPointSize(16)
         self.highButton.setFont(font)
         self.highButton.setObjectName("highButton")
-		#button pressed
+        #button pressed
         self.highButton.toggled.connect(lambda:self.pressurebtnstate(self.highButton))
         self.verticalLayout_2.addWidget(self.highButton)
         self.pressureLabel = QtWidgets.QLabel(self.centralwidget)
@@ -93,15 +93,15 @@ class Ui_MainWindow(object):
         self.auroraButton.setFont(font)
         self.auroraButton.setChecked(True)
         self.auroraButton.setObjectName("auroraButton")
-		#button pressed
-        self.auroraButton.toggled.connect(lambda:self.modebtnstate(self.auroraButton))		
+        #button pressed
+        self.auroraButton.toggled.connect(lambda:self.modebtnstate(self.auroraButton))      
         self.verticalLayout.addWidget(self.auroraButton)
         self.radiationButton = QtWidgets.QRadioButton(self.layoutWidget1)
         font = QtGui.QFont()
         font.setPointSize(16)
         self.radiationButton.setFont(font)
         self.radiationButton.setObjectName("radiationButton")
-		#button pressed
+        #button pressed
         self.radiationButton.toggled.connect(lambda:self.modebtnstate(self.radiationButton))
         self.verticalLayout.addWidget(self.radiationButton)
         self.ringButton = QtWidgets.QRadioButton(self.layoutWidget1)
@@ -109,7 +109,7 @@ class Ui_MainWindow(object):
         font.setPointSize(16)
         self.ringButton.setFont(font)
         self.ringButton.setObjectName("ringButton")
-		#button pressed
+        #button pressed
         self.ringButton.toggled.connect(lambda:self.modebtnstate(self.ringButton))
         self.verticalLayout.addWidget(self.ringButton)
         self.line_2 = QtWidgets.QFrame(self.centralwidget)
@@ -136,6 +136,31 @@ class Ui_MainWindow(object):
         self.powerButton.setIconSize(QtCore.QSize(90, 90))
         self.powerButton.setObjectName("powerButton")
         self.powerButton.clicked.connect(self.powerDown)
+        self.voltageLabelName = QtWidgets.QLabel(self.centralwidget)
+        self.voltageLabelName.setGeometry(QtCore.QRect(160, 10, 131, 45))
+        font = QtGui.QFont()
+        font.setPointSize(22)
+        self.voltageLabelName.setFont(font)
+        self.voltageLabelName.setObjectName("voltageLabelName")
+        
+        self.hvButton = QtWidgets.QPushButton(self.centralwidget)
+        self.hvButton.setGeometry(QtCore.QRect(20, 260, 91, 41))
+        self.hvButton.setText("")
+        self.hvButton.setObjectName("hvButton")
+        ###### toggle stuff ######
+        self.hvButton.setCheckable(True)
+        self.hvButton.toggle()
+        self.hvButton.clicked.connect(lambda:self.buttonToggle(self.hvButton))
+        self.hvButton.setIcon(QtGui.QIcon(":/HV/HVON.png"))
+        self.hvButton.setIconSize(QtCore.QSize(290,41)) ##size of buttonToggle
+        ########################################################
+        self.hvLabel = QtWidgets.QLabel(self.centralwidget)
+        self.hvLabel.setGeometry(QtCore.QRect(120, 260, 301, 41))
+        font = QtGui.QFont()
+        font.setPointSize(22)
+        self.hvLabel.setFont(font)
+        self.hvLabel.setObjectName("hvLabel")
+        
         self.voltageLabel = QtWidgets.QLabel(self.centralwidget)
         self.voltageLabel.setGeometry(QtCore.QRect(180, 10, 191, 45))
         font = QtGui.QFont()
@@ -147,7 +172,36 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.spinBox_2.setFont(font)
-        self.spinBox_2.setObjectName("spinBox_2")
+        self.spinBox_2.setObjectName("spinBox_2")        self.voltageLabel = QtWidgets.QLabel(self.centralwidget)
+        self.voltageLabel.setGeometry(QtCore.QRect(300, 10, 131, 51))
+        font = QtGui.QFont()
+        font.setPointSize(22)
+        self.voltageLabel.setFont(font)
+        self.voltageLabel.setObjectName("voltageLabel")
+        self.currentLabel = QtWidgets.QLabel(self.centralwidget)
+        self.currentLabel.setGeometry(QtCore.QRect(300, 110, 131, 51))
+        font = QtGui.QFont()
+        font.setPointSize(22)
+        self.currentLabel.setFont(font)
+        self.currentLabel.setObjectName("currentLabel")
+        
+        self.currentLabelName = QtWidgets.QLabel(self.centralwidget)
+        self.currentLabelName.setGeometry(QtCore.QRect(160, 110, 131, 45))
+        font = QtGui.QFont()
+        font.setPointSize(22)
+        self.currentLabelName.setFont(font)
+        self.currentLabelName.setObjectName("currentLabelName")
+        
+        self.voltageSlider = QtWidgets.QSlider(self.centralwidget)
+        self.voltageSlider.setGeometry(QtCore.QRect(140, 60, 211, 41))
+        self.voltageSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.voltageSlider.valueChanged.connect(self.valueChange)
+        self.voltageSlider.setObjectName("voltageSlider")
+        self.currentSlider = QtWidgets.QSlider(self.centralwidget)
+        self.currentSlider.setGeometry(QtCore.QRect(140, 161, 211, 41))
+        self.currentSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.currentSlider.setObjectName("currentSlider")
+        
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -155,11 +209,11 @@ class Ui_MainWindow(object):
 
         #timer
         self.timer = QtCore.QTimer()
-        self.timer.setInterval(500) #2 second
+        self.timer.setInterval(500) #.5 second
         self.timer.timeout.connect(self.voltsTimer)
         self.timer.start()
-			
-		
+            
+        
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -174,7 +228,11 @@ class Ui_MainWindow(object):
         self.auroraButton.setText(_translate("MainWindow", "Aurora"))
         self.radiationButton.setText(_translate("MainWindow", "Radiation Belts"))
         self.ringButton.setText(_translate("MainWindow", "Ring Current"))
-        self.voltageLabel.setText(_translate("MainWindow", "Voltage"))
+        self.voltageLabelName.setText(_translate("MainWindow", "Voltage:"))
+        self.hvLabel.setText(_translate("MainWindow", "High Voltage ON"))
+        self.voltageLabel.setText(_translate("MainWindow", "0"))
+        self.currentLabel.setText(_translate("MainWindow", "0"))
+        self.currentLabelName.setText(_translate("MainWindow", "Current:"))
 
     # Function for handling Pressure selection
     def pressurebtnstate(self, b):
@@ -211,16 +269,18 @@ class Ui_MainWindow(object):
             if b.isChecked() == True:
                 print(b.text()+" is selected")
     
-    def valuechange(self):
+    #Will be used for sliders
+    def valueChange(self):
         p.ChangeDutyCycle(self.spinBox.value())
-        
+    
+    #Tier for reading power supply    
     def voltsTimer(self):
         v = adc.read_adc(0,gain=GAIN)
         volts = (v * 187.5) / (10 ** 6)
         self.voltageLabel.setText(str(volts))
         print (str(volts))
-		
-	
+        
+    #Nicely power down the device
     def powerDown(self):
         GPIO.output (21, GPIO.LOW)
         GPIO.output (20, GPIO.LOW)
@@ -229,9 +289,16 @@ class Ui_MainWindow(object):
         print ("Powering Down")
         sleep(2) #fake news
         sys.exit()
-	
-	
-	
+
+    def buttonToggle(self, b):
+        if self.hvButton.isChecked():
+            self.hvButton.setIcon(QtGui.QIcon(":/HV/HVON.png"))
+            self.hvLabel.setText("High Voltage ON")
+        else:
+            self.hvButton.setIcon(QtGui.QIcon(":/HV/HVOFF.png"))    
+            self.hvLabel.setText("High Voltage OFF")            
+    
+    
 
 
 def main():
@@ -245,4 +312,4 @@ def main():
     
 if __name__ == "__main__":
     main()
-	
+    
