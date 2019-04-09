@@ -52,8 +52,8 @@ while (i != 60):
 
 
 	elif (mode == "Belt"):
-		GPIO.output(5, GPIO.LOW)
-		GPIO.output(6, GPIO.HIGH)
+		GPIO.output(5, GPIO.HIGH)
+		GPIO.output(6, GPIO.LOW)
 		GPIO.output(13, GPIO.LOW)
 		GPIO.output(19, GPIO.HIGH)
 		GPIO.output(26, GPIO.LOW)
@@ -64,6 +64,7 @@ while (i != 60):
 		GPIO.output(6, GPIO.LOW)
 		GPIO.output(13, GPIO.HIGH)
 		GPIO.output(19, GPIO.LOW)
+		GPIO.output(26, GPIO.HIGH)
 		print ("%s" %mode)
 
 	else:
