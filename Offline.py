@@ -123,7 +123,7 @@ class Ui_MainWindow(object):
 "background-color: transparent;\n"
 "border-image: url(:/Power/Power.png);\n"
 "background: none;\n"
-"broder: none;\n"
+"border: none;\n"
 "background-repeat: none;\n"
 "\n"
 "}\n"
@@ -167,12 +167,7 @@ class Ui_MainWindow(object):
         font.setPointSize(22)
         self.voltageLabel.setFont(font)
         self.voltageLabel.setObjectName("voltageLabel")
-        self.spinBox_2 = QtWidgets.QSpinBox(self.centralwidget)
-        self.spinBox_2.setGeometry(QtCore.QRect(160, 60, 191, 40))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.spinBox_2.setFont(font)
-        self.spinBox_2.setObjectName("spinBox_2")        self.voltageLabel = QtWidgets.QLabel(self.centralwidget)
+        self.voltageLabel = QtWidgets.QLabel(self.centralwidget)
         self.voltageLabel.setGeometry(QtCore.QRect(300, 10, 131, 51))
         font = QtGui.QFont()
         font.setPointSize(22)

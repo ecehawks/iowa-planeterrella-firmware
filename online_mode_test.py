@@ -48,8 +48,8 @@ while (i != 60):
 		GPIO.output(13, GPIO.LOW)
 		GPIO.output(19, GPIO.LOW)
 		GPIO.output(26, GPIO.HIGH)
-		print (mode)
-		print ("\n")
+		print ("%s" %mode)
+
 
 	elif (mode == "Belt"):
 		GPIO.output(5, GPIO.LOW)
@@ -57,17 +57,14 @@ while (i != 60):
 		GPIO.output(13, GPIO.LOW)
 		GPIO.output(19, GPIO.HIGH)
 		GPIO.output(26, GPIO.LOW)
-		print (mode)
-		print ("\n")
+		print ("%s" %mode)
 
 	elif (mode == "Ring"):
 		GPIO.output(5, GPIO.LOW)
 		GPIO.output(6, GPIO.LOW)
 		GPIO.output(13, GPIO.HIGH)
 		GPIO.output(19, GPIO.LOW)
-		GPIO.output(26, GPIO.HIGH)
-		print (mode)
-		print ("\n")
+		print ("%s" %mode)
 
 	else:
 		print ("Invalid mode type passed: %s " %(mode)) 
@@ -76,13 +73,13 @@ while (i != 60):
 	# Work done based on air_pressure
 	#################################
 	if (air_pressure == "Low"):
-		print (air_pressure)
+		print ("%s\n" %air_pressure)
 
 	elif (air_pressure == "Medium"):
-		print (air_pressure)
+		print ("%s\n" %air_pressure)
 
 	elif (air_pressure == "High"):
-		print (air_pressure)
+		print ("%s\n" %air_pressure)
 
 	else:
 		print ("Invalid air_pressure type passed: %s" %(air_pressure)) 
