@@ -272,7 +272,7 @@ class Ui_MainWindow(object):
     def voltsTimer(self):
         v = adc.read_adc(0,gain=GAIN)
         volts = (v * 187.5) / (10 ** 6)
-        self.voltageLabel.setText(str(volts))
+        self.voltageLabel.setText('%.2f' %volts)
         print (str(volts))
         
     #Nicely power down the device
