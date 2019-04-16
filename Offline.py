@@ -94,7 +94,7 @@ class Ui_MainWindow(object):
         self.auroraButton.setChecked(True)
         self.auroraButton.setObjectName("auroraButton")
         #button pressed
-        self.auroraButton.toggled.connect(lambda:self.modebtnstate(self.auroraButton))      
+        self.auroraButton.toggled.connect(lambda:self.modebtnstate(self.auroraButton))
         self.verticalLayout.addWidget(self.auroraButton)
         self.radiationButton = QtWidgets.QRadioButton(self.layoutWidget1)
         font = QtGui.QFont()
@@ -142,7 +142,7 @@ class Ui_MainWindow(object):
         font.setPointSize(22)
         self.voltageLabelName.setFont(font)
         self.voltageLabelName.setObjectName("voltageLabelName")
-        
+
         self.hvButton = QtWidgets.QPushButton(self.centralwidget)
         self.hvButton.setGeometry(QtCore.QRect(20, 260, 91, 41))
         self.hvButton.setText("")
@@ -160,7 +160,7 @@ class Ui_MainWindow(object):
         font.setPointSize(22)
         self.hvLabel.setFont(font)
         self.hvLabel.setObjectName("hvLabel")
-        
+
         self.voltageLabel = QtWidgets.QLabel(self.centralwidget)
         self.voltageLabel.setGeometry(QtCore.QRect(180, 10, 191, 45))
         font = QtGui.QFont()
@@ -179,14 +179,14 @@ class Ui_MainWindow(object):
         font.setPointSize(22)
         self.currentLabel.setFont(font)
         self.currentLabel.setObjectName("currentLabel")
-        
+
         self.currentLabelName = QtWidgets.QLabel(self.centralwidget)
         self.currentLabelName.setGeometry(QtCore.QRect(160, 110, 131, 45))
         font = QtGui.QFont()
         font.setPointSize(22)
         self.currentLabelName.setFont(font)
         self.currentLabelName.setObjectName("currentLabelName")
-        
+
         self.voltageSlider = QtWidgets.QSlider(self.centralwidget)
         self.voltageSlider.setGeometry(QtCore.QRect(140, 60, 211, 41))
         self.voltageSlider.setOrientation(QtCore.Qt.Horizontal)
@@ -196,7 +196,7 @@ class Ui_MainWindow(object):
         self.currentSlider.setGeometry(QtCore.QRect(140, 161, 211, 41))
         self.currentSlider.setOrientation(QtCore.Qt.Horizontal)
         self.currentSlider.setObjectName("currentSlider")
-        
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -291,9 +291,7 @@ class Ui_MainWindow(object):
             self.hvLabel.setText("High Voltage ON")
         else:
             self.hvButton.setIcon(QtGui.QIcon(":/HV/HVOFF.png"))    
-            self.hvLabel.setText("High Voltage OFF")            
-    
-    
+            self.hvLabel.setText("High Voltage OFF")
 
 
 def main():
@@ -302,9 +300,9 @@ def main():
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
-    
+
     sys.exit(app.exec_())
-    
+
 if __name__ == "__main__":
     main()
-    
+

@@ -5,18 +5,18 @@
 # Created by: PyQt5 UI code generator 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
-
+import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 import icons
 
-class Thread(QThread):
+class Thread(QtCore.QThread):
 
     def __init__(self):
-        QThread.__init__(self)
-        
+        QtCore.QThread.__init__(self)
+
     def __del__(self):
         self.wait()
-        
+
     def run(self):
         i=0
         while (i != 60):
