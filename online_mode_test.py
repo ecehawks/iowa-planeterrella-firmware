@@ -11,10 +11,12 @@ GPIO.setup(13, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Pos)
 GPIO.setup(19, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Neg)
 GPIO.setup(26, GPIO.OUT, initial=GPIO.LOW) # Big Sphere
 
+GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW) # first pressure
+GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW) # second pressure
+
+
 ##### PWM Setup #############
-GPIO.setup(21, GPIO.OUT) #pwm pin 40 on pi
-p = GPIO.PWM(21, 100)
-p.start(0)
+
 
 config = {
   "apiKey": "AIzaSyAkHCx7BgKyYlZgToo2hZgM2g61RrKZYcU",
@@ -75,17 +77,24 @@ while (i != 60):
 	#################################
 	if (air_pressure == "Low"):
 		print ("%s\n" %air_pressure)
+		GPIO.output(20, GPIO.LOW)
+		GPIO.output(21, GPIO.LOW)
 
 	elif (air_pressure == "Medium"):
 		print ("%s\n" %air_pressure)
+		GPIO.output(20, GPIO.LOW)
+		GPIO.output(21, GPIO.HIGH)
 
 	elif (air_pressure == "High"):
 		print ("%s\n" %air_pressure)
+		GPIO.output(20, GPIO.HIGH)
+		GPIO.output(21, GPIO.HIGH)
+
+
 
 	else:
-		print ("Invalid air_pressure type passed: %s" %(air_pressure)) 
+		print ("Invalid air_pressure type passed: %s" %(air_pressure))
 
-	
 	################
 	#voltage control
 	#
@@ -105,3 +114,5 @@ GPIO.output(6, GPIO.LOW)
 GPIO.output(13, GPIO.LOW)
 GPIO.output(19, GPIO.LOW)
 GPIO.output(26, GPIO.LOW)
+GPIO.output(20, GPIO.LOW)
+GPIO.output(21, GPIO.LOW)
