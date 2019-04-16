@@ -243,34 +243,52 @@ class Ui_MainWindow(object):
         if b.text() == "Low":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
-                GPIO.output (21, GPIO.HIGH)
                 GPIO.output (20, GPIO.LOW)
-                GPIO.output (16, GPIO.LOW) 
+                GPIO.output (21, GPIO.LOW)
+                
         if b.text() == "Medium":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
-                GPIO.output (21, GPIO.LOW)
-                GPIO.output (20, GPIO.HIGH)
-                GPIO.output (16, GPIO.LOW)
+                GPIO.output (20, GPIO.LOW)
+                GPIO.output (21, GPIO.HIGH)
 
+                
         if b.text() == "High":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
-                GPIO.output (21, GPIO.LOW)
                 GPIO.output (20, GPIO.LOW)
-                GPIO.output (16, GPIO.HIGH)
+                GPIO.output (21, GPIO.LOW)
 
     #Function handles mode selection
     def modebtnstate(self, b):    
         if b.text() == "Aurora":
             if b.isChecked() == True:
-                print(b.text()+" is selected")
+                #print(b.text()+" is selected")
+                GPIO.output (5, GPIO.LOW)
+                GPIO.output (6, GPIO.HIGH)
+                GPIO.output (13, GPIO.LOW)
+                GPIO.output (19, GPIO.LOW)
+                GPIO.output (26, GPIO.HIGH)
+                
         if b.text() == "Radiation Belts":
             if b.isChecked() == True:
-                print(b.text()+" is selected")
+                #print(b.text()+" is selected")
+                GPIO.output (5, GPIO.HIGH)
+                GPIO.output (6, GPIO.LOW)
+                GPIO.output (13, GPIO.LOW)
+                GPIO.output (19, GPIO.HIGH)
+                GPIO.output (26, GPIO.LOW)
+                
+                
         if b.text() == "Ring Current":
             if b.isChecked() == True:
-                print(b.text()+" is selected")
+                #print(b.text()+" is selected")
+                GPIO.output (5, GPIO.LOW)
+                GPIO.output (6, GPIO.LOW)
+                GPIO.output (13, GPIO.HIGH)
+                GPIO.output (19, GPIO.LOW)
+                GPIO.output (26, GPIO.HIGH)
+                
     
     #Will be used for sliders
     def valueChange(self):
@@ -285,10 +303,13 @@ class Ui_MainWindow(object):
         
     #Nicely power down the device
     def powerDown(self):
-        GPIO.output (21, GPIO.LOW)
-        GPIO.output (20, GPIO.LOW)
-        GPIO.output (16, GPIO.LOW)
+        GPIO.output (5, GPIO.LOW)
+        GPIO.output (6, GPIO.LOW)
+        GPIO.output (13, GPIO.LOW)
+        GPIO.output (19, GPIO.LOW)
+        GPIO.output (26, GPIO.LOW)
         p.ChangeDutyCycle(0)
+        
         print ("Powering Down")
         sleep(2) #fake news
         sys.exit()
