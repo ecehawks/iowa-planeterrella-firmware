@@ -18,10 +18,18 @@ GAIN = 2/3
 
 GPIO.setwarnings(False)    # Ignore warning for now
 GPIO.setmode(GPIO.BCM)   # Use physical pin numbering
-GPIO.setup(16, GPIO.OUT, initial=GPIO.LOW)
+
+GPIO.setup(5, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(6, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(13, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(19, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(26, GPIO.OUT, initial=GPIO.LOW)
+
 GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(26, GPIO.OUT) #PWM PIN
+
+
+GPIO.setup(16, GPIO.OUT) #PWM PIN
 p = GPIO.PWM(26,100)
 p.start(0)
 
