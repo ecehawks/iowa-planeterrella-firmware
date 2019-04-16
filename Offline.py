@@ -13,21 +13,27 @@ import RPi.GPIO as GPIO
 import Adafruit_ADS1x15
 
 #initialize ADC 16 bit
+#i2c SCL pin 5 (gpio 2)
+#i2c SDA pin 3 (gpio 3)
 adc = Adafruit_ADS1x15.ADS1115()
 GAIN = 2/3
 
 GPIO.setwarnings(False)    # Ignore warning for now
 GPIO.setmode(GPIO.BCM)   # Use physical pin numbering
 
-GPIO.setup(5, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(6, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(13, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(19, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(26, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(5, GPIO.OUT, initial=GPIO.LOW)  # Second Needle
+GPIO.setup(6, GPIO.OUT, initial=GPIO.LOW)  # Top Needle
+GPIO.setup(13, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Pos)
+GPIO.setup(19, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Neg)
+GPIO.setup(26, GPIO.OUT, initial=GPIO.LOW) # Big Sphere
 
-GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW) # First Pressure
+GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW) # Second Pressure
 
+##Buttons left##
+#inhibit pin gpio 16 unless more gpio are needed
+#i2c SCL pin 5 (gpio 2)
+#i2c SDA pin 3 (gpio 3)
 
 GPIO.setup(16, GPIO.OUT) #PWM PIN
 p = GPIO.PWM(26,100)
