@@ -6,6 +6,8 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+import sys
+import icons
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -87,10 +89,17 @@ class Ui_MainWindow(object):
         font.setPointSize(48)
         self.voltageLabelName.setFont(font)
         self.voltageLabelName.setObjectName("voltageLabelName")
+
         self.hvButton = QtWidgets.QPushButton(self.centralwidget)
         self.hvButton.setGeometry(QtCore.QRect(50, 1060, 151, 61))
         self.hvButton.setText("")
         self.hvButton.setObjectName("hvButton")
+        self.hvButton.setCheckable(True)
+        self.hvButton.toggle()
+        self.hvButton.clicked.connect(lambda:self.buttonToggle(self.hvButton))
+        self.hvButton.setIcon(QtGui.QIcon(":/HV/HVON.png"))
+        self.hvButton.setIconSize(QtCore.QSize(1060,61))
+
         self.hvLabel = QtWidgets.QLabel(self.centralwidget)
         self.hvLabel.setGeometry(QtCore.QRect(260, 1040, 481, 91))
         font = QtGui.QFont()
@@ -173,5 +182,26 @@ class Ui_MainWindow(object):
         self.radiationButton.setText(_translate("MainWindow", "Radiation Belts"))
         self.ringButton.setText(_translate("MainWindow", "Ring Current"))
 
+    def buttonToggle(self, b):
+        if self.hvButton.isChecked():
+            self.hvButton.setIcon(QtGui.QIcon(":/HV/HVON.png"))
+            self.hvLabel.setText("High Voltage ON")
+        else:
+            self.hvButton.setIcon(QtGui.QIcon(":/HV/HVOFF.png"))    
+            self.hvLabel.setText("High Voltage OFF")
 
-import icons_rc
+
+
+def main():
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+
+    sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    main()
+
+
