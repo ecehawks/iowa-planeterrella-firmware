@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
-    <height>351</height>
+    <width>1600</width>
+    <height>1200</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,15 +17,15 @@
    <widget class="QLabel" name="modeLabel">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>850</x>
       <y>20</y>
-      <width>101</width>
-      <height>31</height>
+      <width>271</width>
+      <height>131</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>22</pointsize>
+      <pointsize>48</pointsize>
      </font>
     </property>
     <property name="text">
@@ -35,10 +35,10 @@
    <widget class="Line" name="line">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>780</x>
       <y>0</y>
       <width>20</width>
-      <height>581</height>
+      <height>1211</height>
      </rect>
     </property>
     <property name="orientation">
@@ -48,10 +48,10 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>50</y>
-      <width>171</width>
-      <height>271</height>
+      <x>1250</x>
+      <y>180</y>
+      <width>281</width>
+      <height>971</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -59,7 +59,7 @@
       <widget class="QRadioButton" name="lowButton">
        <property name="font">
         <font>
-         <pointsize>16</pointsize>
+         <pointsize>26</pointsize>
         </font>
        </property>
        <property name="text">
@@ -74,7 +74,7 @@
       <widget class="QRadioButton" name="medButton">
        <property name="font">
         <font>
-         <pointsize>16</pointsize>
+         <pointsize>26</pointsize>
         </font>
        </property>
        <property name="text">
@@ -89,7 +89,7 @@
       <widget class="QRadioButton" name="highButton">
        <property name="font">
         <font>
-         <pointsize>16</pointsize>
+         <pointsize>26</pointsize>
         </font>
        </property>
        <property name="text">
@@ -102,79 +102,28 @@
    <widget class="QLabel" name="pressureLabel">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>20</y>
-      <width>151</width>
-      <height>31</height>
+      <x>1250</x>
+      <y>30</y>
+      <width>271</width>
+      <height>131</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>22</pointsize>
+      <pointsize>48</pointsize>
      </font>
     </property>
     <property name="text">
      <string>Pressure</string>
     </property>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>50</y>
-      <width>221</width>
-      <height>271</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QRadioButton" name="auroraButton">
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Aurora</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="radiationButton">
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Radiation Belts</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="ringButton">
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Ring Current</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="Line" name="line_2">
     <property name="geometry">
      <rect>
-      <x>670</x>
+      <x>1180</x>
       <y>0</y>
-      <width>20</width>
-      <height>581</height>
+      <width>21</width>
+      <height>1221</height>
      </rect>
     </property>
     <property name="orientation">
@@ -186,8 +135,8 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>101</width>
-      <height>91</height>
+      <width>141</width>
+      <height>121</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -218,15 +167,15 @@ background-repeat: none;
    <widget class="QLabel" name="voltageLabelName">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>10</y>
-      <width>131</width>
-      <height>45</height>
+      <x>100</x>
+      <y>290</y>
+      <width>271</width>
+      <height>91</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>22</pointsize>
+      <pointsize>48</pointsize>
      </font>
     </property>
     <property name="text">
@@ -236,10 +185,10 @@ background-repeat: none;
    <widget class="QPushButton" name="hvButton">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>260</y>
-      <width>91</width>
-      <height>41</height>
+      <x>50</x>
+      <y>1060</y>
+      <width>151</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="text">
@@ -249,15 +198,15 @@ background-repeat: none;
    <widget class="QLabel" name="hvLabel">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>260</y>
-      <width>301</width>
-      <height>41</height>
+      <x>260</x>
+      <y>1040</y>
+      <width>481</width>
+      <height>91</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>22</pointsize>
+      <pointsize>48</pointsize>
      </font>
     </property>
     <property name="text">
@@ -267,15 +216,15 @@ background-repeat: none;
    <widget class="QLabel" name="voltageLabel">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>10</y>
+      <x>370</x>
+      <y>310</y>
       <width>131</width>
-      <height>51</height>
+      <height>61</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>22</pointsize>
+      <pointsize>48</pointsize>
      </font>
     </property>
     <property name="text">
@@ -285,15 +234,15 @@ background-repeat: none;
    <widget class="QLabel" name="currentLabel">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>110</y>
+      <x>370</x>
+      <y>590</y>
       <width>131</width>
-      <height>51</height>
+      <height>61</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>22</pointsize>
+      <pointsize>48</pointsize>
      </font>
     </property>
     <property name="text">
@@ -303,15 +252,15 @@ background-repeat: none;
    <widget class="QLabel" name="currentLabelName">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>110</y>
-      <width>131</width>
-      <height>45</height>
+      <x>100</x>
+      <y>580</y>
+      <width>241</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>22</pointsize>
+      <pointsize>48</pointsize>
      </font>
     </property>
     <property name="text">
@@ -321,10 +270,10 @@ background-repeat: none;
    <widget class="QSlider" name="voltageSlider">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>60</y>
-      <width>211</width>
-      <height>41</height>
+      <x>50</x>
+      <y>430</y>
+      <width>661</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="orientation">
@@ -334,15 +283,66 @@ background-repeat: none;
    <widget class="QSlider" name="currentSlider">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>161</y>
-      <width>211</width>
-      <height>41</height>
+      <x>50</x>
+      <y>710</y>
+      <width>661</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>180</y>
+      <width>279</width>
+      <height>971</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QRadioButton" name="auroraButton">
+       <property name="font">
+        <font>
+         <pointsize>26</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Aurora</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radiationButton">
+       <property name="font">
+        <font>
+         <pointsize>26</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Radiation Belts</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="ringButton">
+       <property name="font">
+        <font>
+         <pointsize>26</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Ring Current</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
