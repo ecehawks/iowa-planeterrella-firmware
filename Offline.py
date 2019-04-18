@@ -37,7 +37,7 @@ GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW) # Second Pressure
 #i2c SDA pin 3 (gpio 3)
 
 GPIO.setup(16, GPIO.OUT) #PWM PIN
-p = GPIO.PWM(26,100)
+p = GPIO.PWM(16,100)
 p.start(0)
 
 
