@@ -22,9 +22,9 @@ GAIN = 2/3
 GPIO.setwarnings(False)    # Ignore warning for now
 GPIO.setmode(GPIO.BCM)   # Use physical pin numbering
 
-GPIO.setup(5, GPIO.OUT, initial=GPIO.LOW)  # Second Needle
-GPIO.setup(6, GPIO.OUT, initial=GPIO.LOW)  # Top Needle
-GPIO.setup(13, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Pos)
+GPIO.setup(0, GPIO.OUT, initial=GPIO.LOW)  # Second Needle
+GPIO.setup(5, GPIO.OUT, initial=GPIO.LOW)  # Top Needle
+GPIO.setup(6, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Pos)
 GPIO.setup(19, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Neg)
 GPIO.setup(26, GPIO.OUT, initial=GPIO.LOW) # Big Sphere
 
@@ -36,10 +36,15 @@ GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW) # Second Pressure
 #i2c SCL pin 5 (gpio 2)
 #i2c SDA pin 3 (gpio 3)
 
-GPIO.setup(16, GPIO.OUT) #PWM PIN
-p = GPIO.PWM(16,100)
-p.start(0)
+GPIO.setup(16, GPIO.OUT, initial=GPIO.HIGH) # inhibit
 
+GPIO.setup(12, GPIO.OUT) #PWM PIN
+pv = GPIO.PWM(12,100)
+pv.start(0)
+
+GPIO.setup(13, GPIO.OUT)
+pc = GPIO.PWM(13, 100)
+pc.start(0)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -100,13 +105,13 @@ class Ui_MainWindow(object):
         font.setPointSize(48)
         self.pressureLabel.setFont(font)
         self.pressureLabel.setObjectName("pressureLabel")
-        
+
         self.line_2 = QtWidgets.QFrame(self.centralwidget)
         self.line_2.setGeometry(QtCore.QRect(1180, 0, 21, 1221))
         self.line_2.setFrameShape(QtWidgets.QFrame.VLine)
         self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_2.setObjectName("line_2")
-        
+
         self.powerButton = QtWidgets.QPushButton(self.centralwidget)
         self.powerButton.setGeometry(QtCore.QRect(10, 10, 141, 121))
         self.powerButton.setStyleSheet("#powerButton{\n"
@@ -171,27 +176,28 @@ class Ui_MainWindow(object):
         font.setPointSize(48)
         self.currentLabelName.setFont(font)
         self.currentLabelName.setObjectName("currentLabelName")
-        
+
         self.voltageSlider = QtWidgets.QSlider(self.centralwidget)
         self.voltageSlider.setGeometry(QtCore.QRect(50, 430, 661, 71))
         self.voltageSlider.setOrientation(QtCore.Qt.Horizontal)
-        self.voltageSlider.valueChanged.connect(self.valueChange)
+        self.voltageSlider.valueChanged.connect(self.valueChangeVolt)
         self.voltageSlider.setObjectName("voltageSlider")
         
         self.currentSlider = QtWidgets.QSlider(self.centralwidget)
         self.currentSlider.setGeometry(QtCore.QRect(50, 710, 661, 71))
         self.currentSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.currentSlider.valueChanged.connect(self.valueChangeCurrent)
         self.currentSlider.setObjectName("currentSlider")
-        
+
         self.layoutWidget1 = QtWidgets.QWidget(self.centralwidget)
         self.layoutWidget1.setGeometry(QtCore.QRect(850, 180, 311, 971))
         self.layoutWidget1.setObjectName("layoutWidget1")
-        
+
         self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget1)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
-        
-        
+
+
         self.auroraButton = QtWidgets.QRadioButton(self.layoutWidget1)
         font = QtGui.QFont()
         font.setPointSize(26)
@@ -211,8 +217,8 @@ class Ui_MainWindow(object):
         self.ringButton.setFont(font)
         self.ringButton.setObjectName("ringButton")
         self.verticalLayout.addWidget(self.ringButton)
-        
-        
+
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -220,10 +226,10 @@ class Ui_MainWindow(object):
 
         #timer
         self.timer = QtCore.QTimer()
-        self.timer.setInterval(500) #.5 second
+        self.timer.setInterval(1000) #.5 second
         self.timer.timeout.connect(self.voltsTimer)
-        self.timer.start()        
-        
+        self.timer.start()
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -252,79 +258,91 @@ class Ui_MainWindow(object):
                 #print(b.text()+" is selected")
                 GPIO.output (20, GPIO.LOW)
                 GPIO.output (21, GPIO.LOW)
-                
+
         if b.text() == "Medium":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
                 GPIO.output (20, GPIO.LOW)
                 GPIO.output (21, GPIO.HIGH)
-                
+
         if b.text() == "High":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
-                GPIO.output (20, GPIO.LOW)
-                GPIO.output (21, GPIO.LOW)
+                GPIO.output (20, GPIO.HIGH)
+                GPIO.output (21, GPIO.HIGH)
 
     #Function handles mode selection
-    def modebtnstate(self, b):    
+    def modebtnstate(self, b):
         if b.text() == "Aurora":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
-                GPIO.output (5, GPIO.LOW)
-                GPIO.output (6, GPIO.HIGH)
-                GPIO.output (13, GPIO.LOW)
+                GPIO.output (0, GPIO.LOW)
+                GPIO.output (5, GPIO.HIGH)
+                GPIO.output (6, GPIO.LOW)
                 GPIO.output (19, GPIO.LOW)
                 GPIO.output (26, GPIO.HIGH)
-                
+
         if b.text() == "Radiation Belts":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
-                GPIO.output (5, GPIO.HIGH)
+                GPIO.output (0, GPIO.HIGH)
+                GPIO.output (5, GPIO.LOW)
                 GPIO.output (6, GPIO.LOW)
-                GPIO.output (13, GPIO.LOW)
                 GPIO.output (19, GPIO.HIGH)
-                GPIO.output (26, GPIO.LOW)       
-                
+                GPIO.output (26, GPIO.LOW)
+
         if b.text() == "Ring Current":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
+                GPIO.output (0, GPIO.LOW)
                 GPIO.output (5, GPIO.LOW)
-                GPIO.output (6, GPIO.LOW)
-                GPIO.output (13, GPIO.HIGH)
+                GPIO.output (6, GPIO.HIGH)
                 GPIO.output (19, GPIO.LOW)
                 GPIO.output (26, GPIO.HIGH)
-                
-    
+
+
     #Will be used for sliders
-    def valueChange(self):
-        p.ChangeDutyCycle(self.spinBox.value())
-    
-    #Tier for reading power supply    
+    def valueChangeVolt(self):
+        pv.ChangeDutyCycle(self.spinBox.value())
+
+    def valueChangeCurrent(self):
+        pc.ChangeDutyCycle(self.spinBox.value())
+
+
+    #Tier for reading power supply
     def voltsTimer(self):
-        v = adc.read_adc(0,gain=GAIN)
+        v = adc.read_adc(2,gain=GAIN)
         volts = (v * 187.5) / (10 ** 6)
+        i = adc.read_adc(3,gain=GAIN)
+        current = ((i * 187.5) / (10 ** 6))
         self.voltageLabel.setText('%.2f' %volts)
-        print (str(volts))
-        
+        self.currentLabel.setText('%.2f' %current)
+        print ("i work")
+
     #Nicely power down the device
     def powerDown(self):
+        GPIO.output (0, GPIO.LOW)
         GPIO.output (5, GPIO.LOW)
         GPIO.output (6, GPIO.LOW)
-        GPIO.output (13, GPIO.LOW)
         GPIO.output (19, GPIO.LOW)
         GPIO.output (26, GPIO.LOW)
-        p.ChangeDutyCycle(0)
-        
+        GPIO.output (16, GPIO.LOW)
+        pv.ChangeDutyCycle(0)
+        pc.ChangeDutyCycle(0)
+        GPIO.output (13, GPIO.LOW)
+        GPIO.output (12, GPIO.LOW)
+
+
         print ("Powering Down")
         sleep(2) #fake news
         sys.exit()
-        
+
     def buttonToggle(self, b):
         if self.hvButton.isChecked():
             self.hvButton.setIcon(QtGui.QIcon(":/HV/HVON.png"))
             self.hvLabel.setText("High Voltage ON")
         else:
-            self.hvButton.setIcon(QtGui.QIcon(":/HV/HVOFF.png"))    
+            self.hvButton.setIcon(QtGui.QIcon(":/HV/HVOFF.png"))
             self.hvLabel.setText("High Voltage OFF")
 
 
