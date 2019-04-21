@@ -204,18 +204,24 @@ class Ui_MainWindow(object):
         self.auroraButton.setFont(font)
         #self.auroraButton.setChecked(True)
         self.auroraButton.setObjectName("auroraButton")
+        #button pressed
+        self.auroraButton.toggled.connect(lambda:self.modebtnstate(self.auroraButton))
         self.verticalLayout.addWidget(self.auroraButton)
         self.radiationButton = QtWidgets.QRadioButton(self.layoutWidget1)
         font = QtGui.QFont()
         font.setPointSize(26)
         self.radiationButton.setFont(font)
         self.radiationButton.setObjectName("radiationButton")
+        #button pressed
+        self.radiationButton.toggled.connect(lambda:self.modebtnstate(self.radiationButton))
         self.verticalLayout.addWidget(self.radiationButton)
         self.ringButton = QtWidgets.QRadioButton(self.layoutWidget1)
         font = QtGui.QFont()
         font.setPointSize(26)
         self.ringButton.setFont(font)
         self.ringButton.setObjectName("ringButton")
+        #button pressed
+        self.ringButton.toggled.connect(lambda:self.modebtnstate(self.ringButton))
         self.verticalLayout.addWidget(self.ringButton)
 
 
@@ -256,49 +262,49 @@ class Ui_MainWindow(object):
         if b.text() == "Low":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
-                GPIO.output (20, GPIO.LOW)
-                GPIO.output (21, GPIO.LOW)
+                GPIO.output(20, GPIO.LOW)
+                GPIO.output(21, GPIO.LOW)
 
         if b.text() == "Medium":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
-                GPIO.output (20, GPIO.LOW)
-                GPIO.output (21, GPIO.HIGH)
+                GPIO.output(20, GPIO.LOW)
+                GPIO.output(21, GPIO.HIGH)
 
         if b.text() == "High":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
-                GPIO.output (20, GPIO.HIGH)
-                GPIO.output (21, GPIO.HIGH)
+                GPIO.output(20, GPIO.HIGH)
+                GPIO.output(21, GPIO.HIGH)
 
     #Function handles mode selection
     def modebtnstate(self, b):
         if b.text() == "Aurora":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
-                GPIO.output (0, GPIO.LOW)
-                GPIO.output (5, GPIO.HIGH) #top needle
-                GPIO.output (6, GPIO.LOW)
-                GPIO.output (19, GPIO.LOW)
-                GPIO.output (26, GPIO.HIGH) #big sphere
+                GPIO.output(0, GPIO.LOW)
+                GPIO.output(5, GPIO.HIGH) #top needle
+                GPIO.output(6, GPIO.LOW)
+                GPIO.output(19, GPIO.LOW)
+                GPIO.output(26, GPIO.HIGH) #big sphere
 
         if b.text() == "Radiation Belts":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
-                GPIO.output (0, GPIO.HIGH) #second needle
-                GPIO.output (5, GPIO.LOW)
-                GPIO.output (6, GPIO.LOW)
-                GPIO.output (19, GPIO.HIGH) #little sphere (neg)
-                GPIO.output (26, GPIO.LOW)
+                GPIO.output(0, GPIO.HIGH) #second needle
+                GPIO.output(5, GPIO.LOW)
+                GPIO.output(6, GPIO.LOW)
+                GPIO.output(19, GPIO.HIGH) #little sphere (neg)
+                GPIO.output(26, GPIO.LOW)
 
         if b.text() == "Ring Current":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
-                GPIO.output (0, GPIO.LOW)
-                GPIO.output (5, GPIO.LOW)
-                GPIO.output (6, GPIO.HIGH) #little sphere (pos)
-                GPIO.output (19, GPIO.LOW)
-                GPIO.output (26, GPIO.HIGH) #big sphere
+                GPIO.output(0, GPIO.LOW)
+                GPIO.output(5, GPIO.LOW)
+                GPIO.output(6, GPIO.HIGH) #little sphere (pos)
+                GPIO.output(19, GPIO.LOW)
+                GPIO.output(26, GPIO.HIGH) #big sphere
 
 
     #Will be used for sliders
@@ -321,16 +327,16 @@ class Ui_MainWindow(object):
 
     #Nicely power down the device
     def powerDown(self):
-        GPIO.output (0, GPIO.LOW)
-        GPIO.output (5, GPIO.LOW)
-        GPIO.output (6, GPIO.LOW)
-        GPIO.output (19, GPIO.LOW)
-        GPIO.output (26, GPIO.LOW)
-        GPIO.output (16, GPIO.LOW)
+        GPIO.output(0, GPIO.LOW)
+        GPIO.output(5, GPIO.LOW)
+        GPIO.output(6, GPIO.LOW)
+        GPIO.output(19, GPIO.LOW)
+        GPIO.output(26, GPIO.LOW)
+        GPIO.output(16, GPIO.LOW)
         pv.ChangeDutyCycle(0)
         pc.ChangeDutyCycle(0)
-        GPIO.output (13, GPIO.LOW)
-        GPIO.output (12, GPIO.LOW)
+        GPIO.output(13, GPIO.LOW)
+        GPIO.output(12, GPIO.LOW)
 
 
         print ("Powering Down")
