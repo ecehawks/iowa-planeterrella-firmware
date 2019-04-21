@@ -36,7 +36,7 @@ GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW) # Second Pressure
 #i2c SCL pin 5 (gpio 2)
 #i2c SDA pin 3 (gpio 3)
 
-GPIO.setup(16, GPIO.OUT, initial=GPIO.LOW) # inhibit
+GPIO.setup(16, GPIO.OUT, initial=GPIO.HIGH) # inhibit
 
 GPIO.setup(12, GPIO.OUT) #PWM PIN
 pv = GPIO.PWM(12,100)
@@ -247,11 +247,11 @@ class Ui_MainWindow(object):
         self.medButton.setText(_translate("MainWindow", "Medium"))
         self.highButton.setText(_translate("MainWindow", "High"))
         self.pressureLabel.setText(_translate("MainWindow", "Pressure"))
-        self.voltageLabelName.setText(_translate("MainWindow", "Voltage:"))
+        self.voltageLabelName.setText(_translate("MainWindow", "Voltage (V):"))
         self.hvLabel.setText(_translate("MainWindow", "High Voltage OFF"))
         self.voltageLabel.setText(_translate("MainWindow", "0"))
         self.currentLabel.setText(_translate("MainWindow", "0"))
-        self.currentLabelName.setText(_translate("MainWindow", "Current:"))
+        self.currentLabelName.setText(_translate("MainWindow", "Current (mA):"))
         self.auroraButton.setText(_translate("MainWindow", "Aurora"))
         self.radiationButton.setText(_translate("MainWindow", "Radiation Belts"))
         self.ringButton.setText(_translate("MainWindow", "Ring Current"))
@@ -317,10 +317,10 @@ class Ui_MainWindow(object):
 
     #Tier for reading power supply
     def voltsTimer(self):
-        v = adc.read_adc(0,gain=GAIN)
-        volts = (v * 187.5) / (10 ** 6)
+        v = adc.read_adc(2,gain=GAIN)
+        volts = 1000 * ((v * 187.5) / (10 ** 6))
         i = adc.read_adc(3,gain=GAIN)
-        current = ((i * 187.5) / (10 ** 6))
+        current = 10 * ((i * 187.5) / (10 ** 6))
         self.voltageLabel.setText('%.2f' %volts)
         self.currentLabel.setText('%.2f' %current)
         #print ("i work")
@@ -347,10 +347,11 @@ class Ui_MainWindow(object):
         if self.hvButton.isChecked():
             self.hvButton.setIcon(QtGui.QIcon(":/HV/HVOFF.png"))
             self.hvLabel.setText("High Voltage OFF")
+            GPIO.output(16, GPIO.HIGH)
         else:
             self.hvButton.setIcon(QtGui.QIcon(":/HV/HVON.png"))
             self.hvLabel.setText("High Voltage ON")
-
+            GPIO.output(16, GPIO.LOW)
 
 
 def main():
