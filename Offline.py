@@ -24,7 +24,7 @@ GPIO.setmode(GPIO.BCM)   # Use physical pin numbering
 
 GPIO.setup(0, GPIO.OUT, initial=GPIO.LOW)  # Second Needle
 GPIO.setup(5, GPIO.OUT, initial=GPIO.LOW)  # Top Needle
-GPIO.setup(6, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Pos)
+GPIO.setup(6, GPIO.OUT, initial=GPIO.LOW)  # Little Sphere (Pos)
 GPIO.setup(19, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Neg)
 GPIO.setup(26, GPIO.OUT, initial=GPIO.LOW) # Big Sphere
 
@@ -277,18 +277,18 @@ class Ui_MainWindow(object):
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
                 GPIO.output (0, GPIO.LOW)
-                GPIO.output (5, GPIO.HIGH)
+                GPIO.output (5, GPIO.HIGH) #top needle
                 GPIO.output (6, GPIO.LOW)
                 GPIO.output (19, GPIO.LOW)
-                GPIO.output (26, GPIO.HIGH)
+                GPIO.output (26, GPIO.HIGH) #big sphere
 
         if b.text() == "Radiation Belts":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
-                GPIO.output (0, GPIO.HIGH)
+                GPIO.output (0, GPIO.HIGH) #second needle
                 GPIO.output (5, GPIO.LOW)
                 GPIO.output (6, GPIO.LOW)
-                GPIO.output (19, GPIO.HIGH)
+                GPIO.output (19, GPIO.HIGH) #little sphere (neg)
                 GPIO.output (26, GPIO.LOW)
 
         if b.text() == "Ring Current":
@@ -296,9 +296,9 @@ class Ui_MainWindow(object):
                 #print(b.text()+" is selected")
                 GPIO.output (0, GPIO.LOW)
                 GPIO.output (5, GPIO.LOW)
-                GPIO.output (6, GPIO.HIGH)
+                GPIO.output (6, GPIO.HIGH) #little sphere (pos)
                 GPIO.output (19, GPIO.LOW)
-                GPIO.output (26, GPIO.HIGH)
+                GPIO.output (26, GPIO.HIGH) #big sphere
 
 
     #Will be used for sliders
@@ -317,7 +317,7 @@ class Ui_MainWindow(object):
         current = ((i * 187.5) / (10 ** 6))
         self.voltageLabel.setText('%.2f' %volts)
         self.currentLabel.setText('%.2f' %current)
-        print ("i work")
+        #print ("i work")
 
     #Nicely power down the device
     def powerDown(self):
