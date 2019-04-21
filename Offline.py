@@ -36,7 +36,7 @@ GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW) # Second Pressure
 #i2c SCL pin 5 (gpio 2)
 #i2c SDA pin 3 (gpio 3)
 
-GPIO.setup(16, GPIO.OUT, initial=GPIO.HIGH) # inhibit
+GPIO.setup(16, GPIO.OUT, initial=GPIO.LOW) # inhibit
 
 GPIO.setup(12, GPIO.OUT) #PWM PIN
 pv = GPIO.PWM(12,100)
@@ -347,11 +347,11 @@ class Ui_MainWindow(object):
         if self.hvButton.isChecked():
             self.hvButton.setIcon(QtGui.QIcon(":/HV/HVOFF.png"))
             self.hvLabel.setText("High Voltage OFF")
-            GPIO.output(16, GPIO.HIGH)
+            GPIO.output(16, GPIO.LOW)
         else:
             self.hvButton.setIcon(QtGui.QIcon(":/HV/HVON.png"))
             self.hvLabel.setText("High Voltage ON")
-            GPIO.output(16, GPIO.LOW)
+            GPIO.output(16, GPIO.HIGH)
 
 
 def main():
