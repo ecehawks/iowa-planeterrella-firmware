@@ -36,7 +36,7 @@ GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW) # Second Pressure
 #i2c SCL pin 5 (gpio 2)
 #i2c SDA pin 3 (gpio 3)
 
-GPIO.setup(16, GPIO.OUT, initial=GPIO.HIGH) # inhibit
+GPIO.setup(16, GPIO.OUT, initial=GPIO.LOW) # inhibit
 
 GPIO.setup(12, GPIO.OUT) #PWM PIN
 pv = GPIO.PWM(12,100)
@@ -146,7 +146,7 @@ class Ui_MainWindow(object):
         self.hvButton.setCheckable(True)
         self.hvButton.toggle()
         self.hvButton.clicked.connect(lambda:self.buttonToggle(self.hvButton))
-        self.hvButton.setIcon(QtGui.QIcon(":/HV/HVON.png"))
+        self.hvButton.setIcon(QtGui.QIcon(":/HV/HVOFF.png"))
         self.hvButton.setIconSize(QtCore.QSize(1060,61))
 
         self.hvLabel = QtWidgets.QLabel(self.centralwidget)
@@ -202,7 +202,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(26)
         self.auroraButton.setFont(font)
-        self.auroraButton.setChecked(True)
+        #self.auroraButton.setChecked(True)
         self.auroraButton.setObjectName("auroraButton")
         self.verticalLayout.addWidget(self.auroraButton)
         self.radiationButton = QtWidgets.QRadioButton(self.layoutWidget1)
@@ -242,7 +242,7 @@ class Ui_MainWindow(object):
         self.highButton.setText(_translate("MainWindow", "High"))
         self.pressureLabel.setText(_translate("MainWindow", "Pressure"))
         self.voltageLabelName.setText(_translate("MainWindow", "Voltage:"))
-        self.hvLabel.setText(_translate("MainWindow", "High Voltage ON"))
+        self.hvLabel.setText(_translate("MainWindow", "High Voltage OFF"))
         self.voltageLabel.setText(_translate("MainWindow", "0"))
         self.currentLabel.setText(_translate("MainWindow", "0"))
         self.currentLabelName.setText(_translate("MainWindow", "Current:"))
@@ -303,15 +303,15 @@ class Ui_MainWindow(object):
 
     #Will be used for sliders
     def valueChangeVolt(self):
-        pv.ChangeDutyCycle(self.spinBox.value())
+        pv.ChangeDutyCycle(self.voltageSlider.value())
 
     def valueChangeCurrent(self):
-        pc.ChangeDutyCycle(self.spinBox.value())
+        pc.ChangeDutyCycle(self.currentSlider.value())
 
 
     #Tier for reading power supply
     def voltsTimer(self):
-        v = adc.read_adc(2,gain=GAIN)
+        v = adc.read_adc(0,gain=GAIN)
         volts = (v * 187.5) / (10 ** 6)
         i = adc.read_adc(3,gain=GAIN)
         current = ((i * 187.5) / (10 ** 6))
@@ -339,11 +339,11 @@ class Ui_MainWindow(object):
 
     def buttonToggle(self, b):
         if self.hvButton.isChecked():
-            self.hvButton.setIcon(QtGui.QIcon(":/HV/HVON.png"))
-            self.hvLabel.setText("High Voltage ON")
-        else:
             self.hvButton.setIcon(QtGui.QIcon(":/HV/HVOFF.png"))
             self.hvLabel.setText("High Voltage OFF")
+        else:
+            self.hvButton.setIcon(QtGui.QIcon(":/HV/HVON.png"))
+            self.hvLabel.setText("High Voltage ON")
 
 
 
