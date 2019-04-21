@@ -288,7 +288,7 @@ class Ui_MainWindow(object):
                 GPIO.output(19, GPIO.LOW)
                 GPIO.output(26, GPIO.HIGH) #big sphere
 
-        if b.text() == "Radiation Belts":
+        if b.text() == "Ring Current":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
                 GPIO.output(0, GPIO.HIGH) #second needle
@@ -297,7 +297,7 @@ class Ui_MainWindow(object):
                 GPIO.output(19, GPIO.HIGH) #little sphere (neg)
                 GPIO.output(26, GPIO.LOW)
 
-        if b.text() == "Ring Current":
+        if b.text() == "Radiation Belts":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
                 GPIO.output(0, GPIO.LOW)
