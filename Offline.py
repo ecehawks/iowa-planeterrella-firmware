@@ -16,8 +16,8 @@ import Adafruit_ADS1x15
 #initialize ADC 16 bit
 #i2c SCL pin 5 (gpio 2)
 #i2c SDA pin 3 (gpio 3)
-adc = Adafruit_ADS1x15.ADS1115()
-GAIN = 2/3
+#adc = Adafruit_ADS1x15.ADS1115()
+#GAIN = 2/3
 
 GPIO.setwarnings(False)    # Ignore warning for now
 GPIO.setmode(GPIO.BCM)   # Use physical pin numbering
@@ -178,7 +178,7 @@ class Ui_MainWindow(object):
         self.currentLabelName.setObjectName("currentLabelName")
 
         self.voltageSlider = QtWidgets.QSlider(self.centralwidget)
-        self.voltageSlider.setGeometry(QtCore.QRect(50, 430, 661, 71))
+        self.voltageSlider.setGeometry(QtCore.QRect(50, 430, 661, 101))
         self.voltageSlider.setOrientation(QtCore.Qt.Horizontal)
         self.voltageSlider.valueChanged.connect(self.valueChangeVolt)
         self.voltageSlider.setObjectName("voltageSlider")
@@ -232,7 +232,7 @@ class Ui_MainWindow(object):
 
         #timer
         self.timer = QtCore.QTimer()
-        self.timer.setInterval(1000) #.5 second
+        self.timer.setInterval(500) #.5 second
         self.timer.timeout.connect(self.voltsTimer)
         self.timer.start()
 
@@ -317,13 +317,13 @@ class Ui_MainWindow(object):
 
     #Tier for reading power supply
     def voltsTimer(self):
-        v = adc.read_adc(2,gain=GAIN)
-        volts = 1000 * ((v * 187.5) / (10 ** 6))
-        i = adc.read_adc(3,gain=GAIN)
-        current = 10 * ((i * 187.5) / (10 ** 6))
-        self.voltageLabel.setText('%.2f' %volts)
-        self.currentLabel.setText('%.2f' %current)
-        #print ("i work")
+        #v = adc.read_adc(2,gain=GAIN)
+        #volts = 1000 * ((v * 187.5) / (10 ** 6))
+        #i = adc.read_adc(3,gain=GAIN)
+        #current = 10 * ((i * 187.5) / (10 ** 6))
+        #self.voltageLabel.setText('%.2f' %volts)
+        #self.currentLabel.setText('%.2f' %current)
+        print ("i work")
 
     #Nicely power down the device
     def powerDown(self):
