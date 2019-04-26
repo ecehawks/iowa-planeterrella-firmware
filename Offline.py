@@ -317,12 +317,12 @@ class Ui_MainWindow(object):
 
     #Tier for reading power supply
     def voltsTimer(self):
-        #v = adc.read_adc(2,gain=GAIN)
-        #volts = 1000 * ((v * 187.5) / (10 ** 6))
-        #i = adc.read_adc(3,gain=GAIN)
-        #current = 10 * ((i * 187.5) / (10 ** 6))
-        #self.voltageLabel.setText('%.2f' %volts)
-        #self.currentLabel.setText('%.2f' %current)
+        v = adc.read_adc(2,gain=GAIN)
+        volts = int(1000 * ((v * 187.5) / (10 ** 6)))
+        i = adc.read_adc(3,gain=GAIN)
+        current = int(10 * ((i * 187.5) / (10 ** 6)))
+        self.voltageLabel.setText('%.2f' %volts)
+        self.currentLabel.setText('%.2f' %current)
         print ("i work")
 
     #Nicely power down the device

@@ -57,7 +57,7 @@ config = {
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
-change = 0
+#change = 0
 
 class firebaseThread(QtCore.QThread):
 
@@ -71,12 +71,81 @@ class firebaseThread(QtCore.QThread):
         while True:
             air_pressure =  db.child("air_pressure").get().val()
             mode = db.child("mode").get().val()
-            voltage = db.child("voltage").get().val()
-            print ("%s" %mode)
+            voltage = int(db.child("Voltage_Control").get().val())
+            #current = int(db.child(Current_Control"),get().val())
+            QtWidgets.QApplication.processEvents() #waits for things to finish            
 
-        
+            #################################
+            # voltage control
+            #################################
+            if (mode == "Aurora"):
+                #gpio stuff
+                GPIO.output(5, GPIO.LOW)
+                GPIO.output(6, GPIO.HIGH)
+                GPIO.output(13, GPIO.LOW)
+                GPIO.output(19, GPIO.LOW)
+                GPIO.output(26, GPIO.HIGH)
+                print ("%s" %mode)
+            elif (mode == "Ring"):
+                GPIO.output(5, GPIO.HIGH)
+                GPIO.output(6, GPIO.LOW)
+                GPIO.output(13, GPIO.LOW)
+                GPIO.output(19, GPIO.HIGH)
+                GPIO.output(26, GPIO.LOW)
+                print ("%s" %mode)
+            elif (mode == "Belt"):
+                GPIO.output(5, GPIO.LOW)
+                GPIO.output(6, GPIO.LOW)
+                GPIO.output(13, GPIO.HIGH)
+                GPIO.output(19, GPIO.LOW)
+                GPIO.output(26, GPIO.HIGH)
+                print ("%s" %mode)
+            else:
+                print ("Invalid mode type passed: %s " %(mode))
+                
+            QtWidgets.QApplication.processEvents()#just keeping things smooth
+    
+            #################################
+            # air_pressure control
+            #################################
+            if (air_pressure == "Low"):
+                print ("%s\n" %air_pressure)
+                GPIO.output(20, GPIO.LOW)
+                GPIO.output(21, GPIO.LOW)
+
+            elif (air_pressure == "Medium"):
+                print ("%s\n" %air_pressure)
+                GPIO.output(20, GPIO.LOW)
+                GPIO.output(21, GPIO.HIGH)
+
+            elif (air_pressure == "High"):
+                print ("%s\n" %air_pressure)
+                GPIO.output(20, GPIO.HIGH)
+                GPIO.output(21, GPIO.HIGH)        
+                    
+            QtWidgets.QApplication.processEvents()#just keeping things smooth
+
+            #################################
+            # Change duty cycles
+            # current and voltage are both values
+            # 0-100 as sent by firebase
+            #################################
+            pv.ChangeDutyCycle(voltage)
+            #pc.ChangeDutyCycle(current) 
+
             QtWidgets.QApplication.processEvents()
-            sleep(1)
+            
+            #################################
+            # Update firebase from adc
+            #################################
+            v = adc.read_adc(2,gain=GAIN)
+            volts = int(1000 * ((v * 187.5) / (10 ** 6)))
+            i = adc.read_adc(3,gain=GAIN)
+            current = int(10 * ((i * 187.5) / (10 ** 6)))
+          
+            
+            QtWidgets.QApplication.processEvents()
+            sleep(.5)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
