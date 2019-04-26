@@ -256,11 +256,9 @@ class Ui_MainWindow(object):
     def buttonToggle(self, b):
         if self.hvButton.isChecked():
             self.hvButton.setIcon(QtGui.QIcon(":/HV/HVOFF.png"))
-            self.hvLabel.setText("High Voltage OFF")
             GPIO.output(16, GPIO.LOW)
         else:
             self.hvButton.setIcon(QtGui.QIcon(":/HV/HVON.png"))
-            self.hvLabel.setText("High Voltage ON")
             GPIO.output(16, GPIO.HIGH)    
         
 def main():
