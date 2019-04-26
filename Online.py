@@ -131,7 +131,8 @@ class firebaseThread(QtCore.QThread):
             # 0-100 as sent by firebase
             #################################
             pv.ChangeDutyCycle(voltage)
-            #pc.ChangeDutyCycle(current) 
+            current = 25
+            pc.ChangeDutyCycle(current) 
 
             QtWidgets.QApplication.processEvents()
             
@@ -143,8 +144,8 @@ class firebaseThread(QtCore.QThread):
             db.update({"voltage": volts})
             
             i = adc.read_adc(3,gain=GAIN)
-            current = int(10 * ((i * 187.5) / (10 ** 6)))
-            db.update({"current": current})
+            milliamps = int(10 * ((i * 187.5) / (10 ** 6)))
+            db.update({"current": milliamps})
           
             
             QtWidgets.QApplication.processEvents()
@@ -177,6 +178,15 @@ class Ui_MainWindow(object):
         self.powerButton.clicked.connect(self.powerDown)
         self.powerButton.setObjectName("powerButton") 
         
+        self.hvButton = QtWidgets.QPushButton(self.centralwidget)
+        self.hvButton.setGeometry(QtCore.QRect(50, 1060, 151, 61))
+        self.hvButton.setText("")
+        self.hvButton.setObjectName("hvButton")
+        self.hvButton.setCheckable(True)
+        self.hvButton.toggle()
+        self.hvButton.clicked.connect(lambda:self.buttonToggle(self.hvButton))
+        self.hvButton.setIcon(QtGui.QIcon(":/HV/HVOFF.png"))
+        self.hvButton.setIconSize(QtCore.QSize(1060,61))
         
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(260, 120, 351, 91))
@@ -242,6 +252,16 @@ class Ui_MainWindow(object):
         sleep(2) #fake news
         sys.exit()
 
+        
+    def buttonToggle(self, b):
+        if self.hvButton.isChecked():
+            self.hvButton.setIcon(QtGui.QIcon(":/HV/HVOFF.png"))
+            self.hvLabel.setText("High Voltage OFF")
+            GPIO.output(16, GPIO.LOW)
+        else:
+            self.hvButton.setIcon(QtGui.QIcon(":/HV/HVON.png"))
+            self.hvLabel.setText("High Voltage ON")
+            GPIO.output(16, GPIO.HIGH)    
         
 def main():
     app = QtWidgets.QApplication(sys.argv)
