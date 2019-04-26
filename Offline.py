@@ -133,7 +133,7 @@ class Ui_MainWindow(object):
         self.powerButton.setObjectName("powerButton")
         
         self.voltageLabelName = QtWidgets.QLabel(self.centralwidget)
-        self.voltageLabelName.setGeometry(QtCore.QRect(100, 280, 311, 101))
+        self.voltageLabelName.setGeometry(QtCore.QRect(20, 280, 441, 101))
         font = QtGui.QFont()
         font.setPointSize(48)
         self.voltageLabelName.setFont(font)
@@ -157,28 +157,28 @@ class Ui_MainWindow(object):
         self.hvLabel.setObjectName("hvLabel")
         
         self.voltageLabel = QtWidgets.QLabel(self.centralwidget)
-        self.voltageLabel.setGeometry(QtCore.QRect(450, 300, 131, 71))
+        self.voltageLabel.setGeometry(QtCore.QRect(540, 280, 221, 101))
         font = QtGui.QFont()
         font.setPointSize(48)
         self.voltageLabel.setFont(font)
         self.voltageLabel.setObjectName("voltageLabel")
         
         self.currentLabel = QtWidgets.QLabel(self.centralwidget)
-        self.currentLabel.setGeometry(QtCore.QRect(450, 590, 131, 71))
+        self.currentLabel.setGeometry(QtCore.QRect(540, 570, 201, 101))
         font = QtGui.QFont()
         font.setPointSize(48)
         self.currentLabel.setFont(font)
         self.currentLabel.setObjectName("currentLabel")
         
         self.currentLabelName = QtWidgets.QLabel(self.centralwidget)
-        self.currentLabelName.setGeometry(QtCore.QRect(100, 580, 301, 81))
+        self.currentLabelName.setGeometry(QtCore.QRect(20, 570, 501, 101))
         font = QtGui.QFont()
         font.setPointSize(48)
         self.currentLabelName.setFont(font)
         self.currentLabelName.setObjectName("currentLabelName")
 
         self.voltageSlider = QtWidgets.QSlider(self.centralwidget)
-        self.voltageSlider.setGeometry(QtCore.QRect(50, 430, 661, 101))
+        self.voltageSlider.setGeometry(QtCore.QRect(50, 430, 661, 71))
         self.voltageSlider.setOrientation(QtCore.Qt.Horizontal)
         self.voltageSlider.valueChanged.connect(self.valueChangeVolt)
         self.voltageSlider.setObjectName("voltageSlider")
@@ -207,6 +207,8 @@ class Ui_MainWindow(object):
         #button pressed
         self.auroraButton.toggled.connect(lambda:self.modebtnstate(self.auroraButton))
         self.verticalLayout.addWidget(self.auroraButton)
+        
+        
         self.radiationButton = QtWidgets.QRadioButton(self.layoutWidget1)
         font = QtGui.QFont()
         font.setPointSize(26)
@@ -215,6 +217,8 @@ class Ui_MainWindow(object):
         #button pressed
         self.radiationButton.toggled.connect(lambda:self.modebtnstate(self.radiationButton))
         self.verticalLayout.addWidget(self.radiationButton)
+        
+        
         self.ringButton = QtWidgets.QRadioButton(self.layoutWidget1)
         font = QtGui.QFont()
         font.setPointSize(26)
@@ -321,8 +325,8 @@ class Ui_MainWindow(object):
         volts = int(1000 * ((v * 187.5) / (10 ** 6)))
         i = adc.read_adc(3,gain=GAIN)
         current = int(10 * ((i * 187.5) / (10 ** 6)))
-        self.voltageLabel.setText('%.2f' %volts)
-        self.currentLabel.setText('%.2f' %current)
+        self.voltageLabel.setText('%d' %volts)
+        self.currentLabel.setText('%d' %current)
         print ("i work")
 
     #Nicely power down the device

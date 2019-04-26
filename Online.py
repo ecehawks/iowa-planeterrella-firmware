@@ -140,12 +140,15 @@ class firebaseThread(QtCore.QThread):
             #################################
             v = adc.read_adc(2,gain=GAIN)
             volts = int(1000 * ((v * 187.5) / (10 ** 6)))
+            db.update({"voltage": volts})
+            
             i = adc.read_adc(3,gain=GAIN)
             current = int(10 * ((i * 187.5) / (10 ** 6)))
+            db.update({"current": current})
           
             
             QtWidgets.QApplication.processEvents()
-            sleep(.5)
+            sleep(.1)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
