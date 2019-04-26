@@ -16,8 +16,8 @@ import Adafruit_ADS1x15
 #initialize ADC 16 bit
 #i2c SCL pin 5 (gpio 2)
 #i2c SDA pin 3 (gpio 3)
-#adc = Adafruit_ADS1x15.ADS1115()
-#GAIN = 2/3
+adc = Adafruit_ADS1x15.ADS1115()
+GAIN = 2/3
 
 GPIO.setwarnings(False)    # Ignore warning for now
 GPIO.setmode(GPIO.BCM)   # Use physical pin numbering
