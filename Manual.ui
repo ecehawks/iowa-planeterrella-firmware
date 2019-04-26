@@ -167,9 +167,9 @@ background-repeat: none;
    <widget class="QLabel" name="voltageLabelName">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>20</x>
       <y>280</y>
-      <width>311</width>
+      <width>441</width>
       <height>101</height>
      </rect>
     </property>
@@ -179,7 +179,7 @@ background-repeat: none;
      </font>
     </property>
     <property name="text">
-     <string>Voltage:</string>
+     <string>Voltage (V):</string>
     </property>
    </widget>
    <widget class="QPushButton" name="hvButton">
@@ -216,10 +216,10 @@ background-repeat: none;
    <widget class="QLabel" name="voltageLabel">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>300</y>
-      <width>131</width>
-      <height>71</height>
+      <x>540</x>
+      <y>280</y>
+      <width>221</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="font">
@@ -234,10 +234,10 @@ background-repeat: none;
    <widget class="QLabel" name="currentLabel">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>590</y>
-      <width>131</width>
-      <height>71</height>
+      <x>540</x>
+      <y>570</y>
+      <width>201</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="font">
@@ -252,10 +252,10 @@ background-repeat: none;
    <widget class="QLabel" name="currentLabelName">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>580</y>
-      <width>301</width>
-      <height>81</height>
+      <x>20</x>
+      <y>570</y>
+      <width>501</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="font">
@@ -264,7 +264,7 @@ background-repeat: none;
      </font>
     </property>
     <property name="text">
-     <string>Current:</string>
+     <string>Current (mA):</string>
     </property>
    </widget>
    <widget class="QSlider" name="voltageSlider">
@@ -273,8 +273,29 @@ background-repeat: none;
       <x>50</x>
       <y>430</y>
       <width>661</width>
-      <height>71</height>
+      <height>68</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">.QSlider {
+    min-height: 68px;
+    max-height: 68px;
+
+}
+
+.QSlider::groove:horizontal {
+    height: 5px;
+    background: #000000;
+    margin: 0 12px;
+}
+
+.QSlider::handle:horizontal {
+	border: #ffff00;
+    background: #ffff00;
+    width: 23px;
+    height: 100px;
+    margin: -24px -12px;
+}</string>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -312,9 +333,6 @@ background-repeat: none;
        </property>
        <property name="text">
         <string>Aurora</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
        </property>
       </widget>
      </item>
