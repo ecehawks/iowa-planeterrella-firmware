@@ -16,8 +16,8 @@ import Adafruit_ADS1x15
 #initialize ADC 16 bit
 #i2c SCL pin 5 (gpio 2)
 #i2c SDA pin 3 (gpio 3)
-#adc = Adafruit_ADS1x15.ADS1115()
-#GAIN = 2/3
+adc = Adafruit_ADS1x15.ADS1115()
+GAIN = 2/3
 
 GPIO.setwarnings(False)    # Ignore warning for now
 GPIO.setmode(GPIO.BCM)   # Use physical pin numbering
@@ -321,12 +321,12 @@ class Ui_MainWindow(object):
 
     #Tier for reading power supply
     def voltsTimer(self):
-        v = adc.read_adc(2,gain=GAIN)
-        volts = int(1000 * ((v * 187.5) / (10 ** 6)))
-        i = adc.read_adc(3,gain=GAIN)
-        current = int(10 * ((i * 187.5) / (10 ** 6)))
-        self.voltageLabel.setText('%d' %volts)
-        self.currentLabel.setText('%d' %current)
+        v = adc.read_adc(0,gain=GAIN)
+        volts = 1000 * ((v * 187.5) / (10 ** 6))
+        i = adc.read_adc(1,gain=GAIN)
+        current = 10 * ((i * 187.5) / (10 ** 6))
+        self.voltageLabel.setText('%.2f' %(volts))
+        self.currentLabel.setText('%.2f' %(current))
         print ("i work")
 
     #Nicely power down the device
