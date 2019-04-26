@@ -14,16 +14,18 @@ firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
 i=0
-while (i != 60):
+while (i != 5):
     air_pressure =  db.child("air_pressure").get().val()
     mode = db.child("mode").get().val()
     voltage = db.child("voltage_control").get().val()
 
-    db.child("ui-planeterrella").update("voltage":"50")
+    db.update({"voltage": "50"})
 
-
+    voltcheck = db.child("voltage").get().val()
+    print(voltcheck)
 
 
     sleep(5)
     i += 1
 
+db.update({"voltage": "0"})
