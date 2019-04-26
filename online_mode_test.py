@@ -29,15 +29,15 @@ while (i != 60):
     # 4 & 10 = Little sphere+, Big Sphere       Ring Current
     #########################
     if (mode == "Aurora"):
-        db.child("voltage").update("1")
+        db.child("ui-planeterrella").child("voltage").update("1")
         print ("%s" %mode)
 
     elif (mode == "Belt"):
-        db.child("voltage").update("50")
+        db.child("ui-planeterrella").child("voltage").update("50")
         print ("%s" %mode)
 
     elif (mode == "Ring"):
-        db.child("voltage").update("99")
+        db.child("ui-planeterrella").child("voltage").update("99")
         print ("%s" %mode)
 
     else:
@@ -47,15 +47,15 @@ while (i != 60):
     # Work done based on air_pressure
     #################################
     if (air_pressure == "Low"):
-        db.child("current").update("1")
+        db.child("ui-planeterrella").child("current").update("1")
         print ("%s\n" %air_pressure)
 
     elif (air_pressure == "Medium"):
-        db.child("current").update("50")
+        db.child("ui-planeterrella").child("current").update("50")
         print ("%s\n" %air_pressure)
 
     elif (air_pressure == "High"):
-        db.child("current").update("99")
+        db.child("ui-planeterrella").child("current").update("99")
         print ("%s\n" %air_pressure)
         
     else:
