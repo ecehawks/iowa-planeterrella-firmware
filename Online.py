@@ -130,9 +130,9 @@ class firebaseThread(QtCore.QThread):
             # current and voltage are both values
             # 0-100 as sent by firebase
             #################################
-            pv.ChangeDutyCycle(70)
+            pv.ChangeDutyCycle(voltage)
             current = 25
-            pc.ChangeDutyCycle(55) 
+            pc.ChangeDutyCycle(current) 
 
             QtWidgets.QApplication.processEvents()
             
