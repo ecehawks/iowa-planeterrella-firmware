@@ -80,25 +80,25 @@ class firebaseThread(QtCore.QThread):
             #################################
             if (mode == "Aurora"):
                 #gpio stuff
-                GPIO.output(5, GPIO.LOW)
-                GPIO.output(6, GPIO.HIGH)
-                GPIO.output(13, GPIO.LOW)
+                GPIO.output(0, GPIO.LOW)
+                GPIO.output(5, GPIO.HIGH) #top needle
+                GPIO.output(6, GPIO.LOW)
                 GPIO.output(19, GPIO.LOW)
-                GPIO.output(26, GPIO.HIGH)
+                GPIO.output(26, GPIO.HIGH) #big sphere
                 print ("%s" %mode)
             elif (mode == "Ring"):
-                GPIO.output(5, GPIO.HIGH)
+                GPIO.output(0, GPIO.HIGH) #second needle
+                GPIO.output(5, GPIO.LOW)
                 GPIO.output(6, GPIO.LOW)
-                GPIO.output(13, GPIO.LOW)
-                GPIO.output(19, GPIO.HIGH)
+                GPIO.output(19, GPIO.HIGH) #little sphere (neg)
                 GPIO.output(26, GPIO.LOW)
                 print ("%s" %mode)
             elif (mode == "Belt"):
+                GPIO.output(0, GPIO.LOW)
                 GPIO.output(5, GPIO.LOW)
-                GPIO.output(6, GPIO.LOW)
-                GPIO.output(13, GPIO.HIGH)
+                GPIO.output(6, GPIO.HIGH) #little sphere (pos)
                 GPIO.output(19, GPIO.LOW)
-                GPIO.output(26, GPIO.HIGH)
+                GPIO.output(26, GPIO.HIGH) #big sphere
                 print ("%s" %mode)
             else:
                 print ("Invalid mode type passed: %s " %(mode))
