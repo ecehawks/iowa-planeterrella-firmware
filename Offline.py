@@ -28,8 +28,8 @@ GPIO.setup(6, GPIO.OUT, initial=GPIO.LOW)  # Little Sphere (Pos)
 GPIO.setup(19, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Neg)
 GPIO.setup(26, GPIO.OUT, initial=GPIO.LOW) # Big Sphere
 
-GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW) # First Pressure
-GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW) # Second Pressure
+GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW) # Pressure
+GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW) # Neon
 
 ##Buttons left##
 #inhibit pin gpio 16 unless more gpio are needed
@@ -267,19 +267,11 @@ class Ui_MainWindow(object):
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
                 GPIO.output(20, GPIO.LOW)
-                GPIO.output(21, GPIO.LOW)
-
-        if b.text() == "Medium":
-            if b.isChecked() == True:
-                #print(b.text()+" is selected")
-                GPIO.output(20, GPIO.LOW)
-                GPIO.output(21, GPIO.HIGH)
 
         if b.text() == "High":
             if b.isChecked() == True:
                 #print(b.text()+" is selected")
                 GPIO.output(20, GPIO.HIGH)
-                GPIO.output(21, GPIO.HIGH)
 
     #Function handles mode selection
     def modebtnstate(self, b):
@@ -341,6 +333,8 @@ class Ui_MainWindow(object):
         pc.ChangeDutyCycle(0)
         GPIO.output(13, GPIO.LOW)
         GPIO.output(12, GPIO.LOW)
+        GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW) 
+        GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW)
 
 
         print ("Powering Down")
@@ -356,6 +350,18 @@ class Ui_MainWindow(object):
             self.hvButton.setIcon(QtGui.QIcon(":/HV/HVON.png"))
             self.hvLabel.setText("High Voltage ON")
             GPIO.output(16, GPIO.HIGH)
+            
+    def neonToggle(self, b):
+        if self.hvButton.isChecked():
+            self.hvButton.setIcon(QtGui.QIcon(":/HV/HVOFF.png"))
+            self.hvLabel.setText("High Voltage OFF")
+            #GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW) # Pressure shouldnt adjust this
+            GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW) # Neon
+        else:
+            self.hvButton.setIcon(QtGui.QIcon(":/HV/HVON.png"))
+            self.hvLabel.setText("High Voltage ON")
+            GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW) # Pressure
+            GPIO.setup(21, GPIO.OUT, initial=GPIO.HIGH) # Neon
 
 
 def main():

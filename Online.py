@@ -29,7 +29,7 @@ GPIO.setup(19, GPIO.OUT, initial=GPIO.LOW) # Little Sphere (Neg)
 GPIO.setup(26, GPIO.OUT, initial=GPIO.LOW) # Big Sphere
 
 GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW) # First Pressure
-GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW) # Second Pressure
+#GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW) # Neon dont need in online mode
 
 ##Buttons left##
 #inhibit pin gpio 16 unless more gpio are needed
@@ -72,9 +72,19 @@ class firebaseThread(QtCore.QThread):
             air_pressure =  db.child("air_pressure").get().val()
             mode = db.child("mode").get().val()
             voltage = int(db.child("Voltage_Control").get().val())
-            #current = int(db.child(Current_Control"),get().val())
+            current = int(db.child(Current_Control").get().val())
+            inhibit = int(db.child(Current_Control").get().val())
             QtWidgets.QApplication.processEvents() #waits for things to finish            
 
+            
+            ################################
+            # Inhibit
+            ################################
+            if(inhibit):
+                GPIO.output(16, GPIO.HIGH)
+            else:
+                GPIO.output(16, GPIO.LOW)
+                         
             #################################
             # voltage control
             #################################
@@ -131,7 +141,6 @@ class firebaseThread(QtCore.QThread):
             # 0-100 as sent by firebase
             #################################
             pv.ChangeDutyCycle(voltage)
-            current = 10
             pc.ChangeDutyCycle(current) 
 
             QtWidgets.QApplication.processEvents()
@@ -243,7 +252,8 @@ class Ui_MainWindow(object):
         pc.ChangeDutyCycle(0)
         GPIO.output(13, GPIO.LOW)
         GPIO.output(12, GPIO.LOW)
-        
+        GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW) 
+                
         self.myThread.quit()
         #self.myThread.wait()
         self.myThread.terminate()
