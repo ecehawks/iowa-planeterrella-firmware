@@ -124,8 +124,8 @@ class firebaseThread(QtCore.QThread):
 
             elif (air_pressure == "High"):
                 print ("%s\n" %air_pressure)
-                GPIO.output(20, GPIO.LOW)
-                GPIO.output(21, GPIO.HIGH)        
+                GPIO.output(20, GPIO.HIGH)
+        
                     
             QtWidgets.QApplication.processEvents()#just keeping things smooth
 
