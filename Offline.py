@@ -131,7 +131,7 @@ class Ui_MainWindow(object):
 "background-color: transparent;\n"
 "border-image: url(:/Power/Power.png);\n"
 "background: none;\n"
-"broder: none;\n"
+"border: none;\n"
 "background-repeat: none;\n"
 "\n"
 "}\n"
