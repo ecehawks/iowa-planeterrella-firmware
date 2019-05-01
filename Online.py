@@ -73,7 +73,7 @@ class firebaseThread(QtCore.QThread):
             mode = db.child("mode").get().val()
             voltage = int(db.child("Voltage_Control").get().val())
             current = int(db.child("Current_Control").get().val())
-            inhibit = int(db.child("Current_Control").get().val())
+            inhibit = int(db.child("inhibit").get().val())
             QtWidgets.QApplication.processEvents() #waits for things to finish            
 
             
@@ -213,22 +213,7 @@ class Ui_MainWindow(object):
         
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    #change is set to zero when a mode is changed
-    #def changeDetect(self):
-    #    if change > 30:
-    #        GPIO.output(0, GPIO.LOW)
-    #        GPIO.output(5, GPIO.LOW)
-    #        GPIO.output(6, GPIO.LOW)
-    #        GPIO.output(19, GPIO.LOW)
-    #        GPIO.output(26, GPIO.LOW)
-    #        GPIO.output(16, GPIO.LOW)
-    #        pv.ChangeDutyCycle(0)
-    #        pc.ChangeDutyCycle(0)
-    #        GPIO.output(13, GPIO.LOW)
-    #        GPIO.output(12, GPIO.LOW)
-    #    else:
-    #        change += 5
+   
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
