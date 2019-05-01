@@ -309,12 +309,12 @@ class Ui_MainWindow(object):
             self.neon_button.setIcon(QtGui.QIcon(":/HV/HVOFF.png"))
             self.neonLabel.setText("Neon: OFF")
             #GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW) # Pressure shouldnt adjust this
-            #GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW) # Neon
+            GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW) # Neon
         else:
             self.neon_button.setIcon(QtGui.QIcon(":/HV/HVON.png"))
             self.neonLabel.setText("Neon: ON")
-            #GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW) # Pressure
-            #GPIO.setup(21, GPIO.OUT, initial=GPIO.HIGH) # Neon
+            GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW) # Pressure
+            GPIO.setup(21, GPIO.OUT, initial=GPIO.HIGH) # Neon
 
             
     ###########################################    

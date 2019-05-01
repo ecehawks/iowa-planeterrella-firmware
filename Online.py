@@ -72,8 +72,8 @@ class firebaseThread(QtCore.QThread):
             air_pressure =  db.child("air_pressure").get().val()
             mode = db.child("mode").get().val()
             voltage = int(db.child("Voltage_Control").get().val())
-            current = int(db.child(Current_Control").get().val())
-            inhibit = int(db.child(Current_Control").get().val())
+            current = int(db.child("Current_Control").get().val())
+            inhibit = int(db.child("Current_Control").get().val())
             QtWidgets.QApplication.processEvents() #waits for things to finish            
 
             
@@ -121,16 +121,10 @@ class firebaseThread(QtCore.QThread):
             if (air_pressure == "Low"):
                 print ("%s\n" %air_pressure)
                 GPIO.output(20, GPIO.LOW)
-                GPIO.output(21, GPIO.LOW)
-
-            elif (air_pressure == "Medium"):
-                print ("%s\n" %air_pressure)
-                GPIO.output(20, GPIO.LOW)
-                GPIO.output(21, GPIO.HIGH)
 
             elif (air_pressure == "High"):
                 print ("%s\n" %air_pressure)
-                GPIO.output(20, GPIO.HIGH)
+                GPIO.output(20, GPIO.LOW)
                 GPIO.output(21, GPIO.HIGH)        
                     
             QtWidgets.QApplication.processEvents()#just keeping things smooth
