@@ -332,6 +332,7 @@ class Ui_MainWindow(object):
                 #print(b.text()+" is selected")
                 GPIO.output(20, GPIO.HIGH)
 
+                
     #######################################            
     #Function handles mode selection
     #######################################
@@ -425,7 +426,7 @@ class Ui_MainWindow(object):
         self.highButton.setText(_translate("MainWindow", "High"))
         self.pressureLabel.setText(_translate("MainWindow", "Pressure"))
         self.voltageLabelName.setText(_translate("MainWindow", "Voltage (V):"))
-        self.hvLabel.setText(_translate("MainWindow", "High Volt: ON"))
+        self.hvLabel.setText(_translate("MainWindow", "High Volt: OFF"))
         self.voltageLabel.setText(_translate("MainWindow", "0"))
         self.currentLabel.setText(_translate("MainWindow", "0"))
         self.currentLabelName.setText(_translate("MainWindow", "Current (mA):"))

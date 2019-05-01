@@ -153,7 +153,7 @@ class firebaseThread(QtCore.QThread):
             db.update({"voltage": volts})
             
             i = adc.read_adc(1,gain=GAIN)
-            milliamps = int(10 * ((i * 187.5) / (10 ** 6)))
+            milliamps = round((10 * ((i * 187.5) / (10 ** 6))),2)
             db.update({"current": milliamps})
           
             
