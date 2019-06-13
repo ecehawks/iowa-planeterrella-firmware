@@ -5,7 +5,9 @@
 # Created by: PyQt5 UI code generator 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
-
+import board
+import busio
+import adafruit_mcp4725
 import sys
 import icons
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -39,12 +41,16 @@ GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW) # Neon
 GPIO.setup(16, GPIO.OUT, initial=GPIO.LOW) # inhibit
 
 GPIO.setup(12, GPIO.OUT) #PWM PIN Voltage
-pv = GPIO.PWM(12,100) #can range 0-100
-pv.start(0) #start at 0
+#pv = GPIO.PWM(12,100) #can range 0-100
+#pv.start(0) #start at 0
 
 GPIO.setup(13, GPIO.OUT)#PWM Pin Current
-pc = GPIO.PWM(13, 100) #can range 0-100
-pc.start(0) #start at 0
+#pc = GPIO.PWM(13, 100) #can range 0-100
+#pc.start(0) #start at 0
+
+i2c = busio.I2C(board.SCL, board.SDA)
+currentdac = adafruit_mcp4725.MCP4725(i2c, address=0x62)
+voltagedac = adafruit_mcp4725.MCP4725(i2c, address=0x63)
 
 
 class Ui_MainWindow(object):
@@ -369,10 +375,15 @@ class Ui_MainWindow(object):
     #Voltae and current control
     ###########################
     def valueChangeVolt(self):
-        pv.ChangeDutyCycle(self.voltageSlider.value())
+        value = (self.voltageSlider.value()/100)
+        print (value)
+        voltagedac.normalized_value = value
+        #pv.ChangeDutyCycle(self.voltageSlider.value())
 
     def valueChangeCurrent(self):
-        pc.ChangeDutyCycle(self.currentSlider.value())
+        currentdac.normalized_value = (self.currentSlider.value()/100)
+
+        #pc.ChangeDutyCycle(self.currentSlider.value())
 
         
         
@@ -386,7 +397,7 @@ class Ui_MainWindow(object):
         current = 10 * ((i * 187.5) / (10 ** 6))
         self.voltageLabel.setText('%.2f' %(volts))
         self.currentLabel.setText('%.2f' %(current))
-        print ("i work")
+        
 
         
         

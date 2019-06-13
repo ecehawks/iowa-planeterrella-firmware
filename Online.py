@@ -71,9 +71,9 @@ class firebaseThread(QtCore.QThread):
         while True:
             air_pressure =  db.child("air_pressure").get().val()
             mode = db.child("mode").get().val()
-            voltage = int(db.child("Voltage_Control").get().val())
-            current = int(db.child("Current_Control").get().val())
-            inhibit = int(db.child("inhibit").get().val())
+            voltage = int(db.child("Voltage_Control2").get().val())
+            current = int(db.child("Current_Control2").get().val())
+            inhibit = int(db.child("inhibit2").get().val())
             QtWidgets.QApplication.processEvents() #waits for things to finish            
 
             
