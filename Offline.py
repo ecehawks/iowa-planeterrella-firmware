@@ -95,15 +95,15 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.lowButton)
         
         
-        self.medButton = QtWidgets.QRadioButton(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(26)
-        self.medButton.setFont(font)
-        self.medButton.setChecked(True)
-        self.medButton.setObjectName("medButton")
+        #self.medButton = QtWidgets.QRadioButton(self.layoutWidget)
+        #font = QtGui.QFont()
+        #font.setPointSize(26)
+        #self.medButton.setFont(font)
+        #self.medButton.setChecked(True)
+        #self.medButton.setObjectName("medButton")
         ############button pressed
-        self.medButton.toggled.connect(lambda:self.pressurebtnstate(self.medButton))
-        self.verticalLayout_2.addWidget(self.medButton)
+        #self.medButton.toggled.connect(lambda:self.pressurebtnstate(self.medButton))
+        #self.verticalLayout_2.addWidget(self.medButton)
         
         
         self.highButton = QtWidgets.QRadioButton(self.layoutWidget)
