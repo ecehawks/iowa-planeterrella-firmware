@@ -38,14 +38,17 @@ GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW) # First Pressure
 
 GPIO.setup(16, GPIO.OUT, initial=GPIO.LOW) # inhibit
 
-GPIO.setup(12, GPIO.OUT) #PWM PIN
-pv = GPIO.PWM(12,100)
-pv.start(0)
+#GPIO.setup(12, GPIO.OUT) #PWM PIN
+#pv = GPIO.PWM(12,100)
+#pv.start(0)
 
-GPIO.setup(13, GPIO.OUT)
-pc = GPIO.PWM(13, 100)
-pc.start(0)
+#GPIO.setup(13, GPIO.OUT)
+#pc = GPIO.PWM(13, 100)
+#pc.start(0)
 
+i2c = busio.I2C(board.SCL, board.SDA)
+currentdac = adafruit_mcp4725.MCP4725(i2c, address=0x62)
+voltagedac = adafruit_mcp4725.MCP4725(i2c, address=0x63)
 
 config = {
   "apiKey": "AIzaSyAkHCx7BgKyYlZgToo2hZgM2g61RrKZYcU",
@@ -125,8 +128,8 @@ class firebaseThread(QtCore.QThread):
             elif (air_pressure == "High"):
                 print ("%s\n" %air_pressure)
                 GPIO.output(20, GPIO.HIGH)
-        
-                    
+
+
             QtWidgets.QApplication.processEvents()#just keeping things smooth
 
             #################################
@@ -134,11 +137,13 @@ class firebaseThread(QtCore.QThread):
             # current and voltage are both values
             # 0-100 as sent by firebase
             #################################
-            pv.ChangeDutyCycle(voltage)
-            pc.ChangeDutyCycle(current) 
+            #pv.ChangeDutyCycle(voltage)
+            #pc.ChangeDutyCycle(current) 
+            currentdac.normalized_value = (current/100)
+            voltagedac.normalized_value = (voltage/100)
 
             QtWidgets.QApplication.processEvents()
-            
+
             #################################
             # Update firebase from adc
             #################################

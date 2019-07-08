@@ -376,7 +376,7 @@ class Ui_MainWindow(object):
     ###########################
     def valueChangeVolt(self):
         value = (self.voltageSlider.value()/100)
-        print (value)
+        #print (value)
         voltagedac.normalized_value = value
         #pv.ChangeDutyCycle(self.voltageSlider.value())
 
