@@ -207,6 +207,7 @@ class Ui_MainWindow(object):
         self.voltageSlider.setGeometry(QtCore.QRect(50, 430, 661, 68))
         self.voltageSlider.setOrientation(QtCore.Qt.Horizontal)
         #####################Slider changes
+        voltagedac.normalized_value = (0)
         self.voltageSlider.valueChanged.connect(self.valueChangeVolt)
         self.voltageSlider.setObjectName("voltageSlider")
         
@@ -215,6 +216,7 @@ class Ui_MainWindow(object):
         self.currentSlider.setGeometry(QtCore.QRect(50, 710, 661, 71))
         self.currentSlider.setOrientation(QtCore.Qt.Horizontal)
         ####################Slider changes
+        currentdac.normalized_value = (0)
         self.currentSlider.valueChanged.connect(self.valueChangeCurrent)
         self.currentSlider.setObjectName("currentSlider")
         
@@ -433,7 +435,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Uiowa Planeterella"))
         self.modeLabel.setText(_translate("MainWindow", "Mode"))
         self.lowButton.setText(_translate("MainWindow", "Low"))
-        self.medButton.setText(_translate("MainWindow", "Medium"))
+        #self.medButton.setText(_translate("MainWindow", "Medium"))
         self.highButton.setText(_translate("MainWindow", "High"))
         self.pressureLabel.setText(_translate("MainWindow", "Pressure"))
         self.voltageLabelName.setText(_translate("MainWindow", "Voltage (V):"))

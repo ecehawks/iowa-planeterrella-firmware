@@ -6,6 +6,9 @@
 #
 # WARNING! All changes made in this file will be lost!
 import sys
+import busio
+import board
+import adafruit_mcp4725
 from PyQt5 import QtCore, QtGui, QtWidgets
 import icons
 import pyrebase
